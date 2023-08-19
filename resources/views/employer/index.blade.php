@@ -30,130 +30,49 @@
                                 <span data-feather="x"></span>
                             </button>
                         </div>
-                        <div class="modal-body">
-                            <div class="new-member-modal">
-                                <form>
-                                    <div class="form-group mb-20">
-                                        <input type="text" class="form-control" placeholder="Duran Clayton">
+                        <div class="card-body py-md-30">
+                            <form method="post" action="{{ route('department.store') }}">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-6 mb-25">
+                                        <input type="text" name="name" class="form-control ih-medium ip-gray radius-xs b-light px-15"
+                                               placeholder="name">
                                     </div>
-                                    <div class="form-group mb-20">
-                                        <div class="category-member">
-                                            <select class="js-example-basic-single js-states form-control"
-                                                    id="category-member">
-                                                <option value="JAN">1</option>
-                                                <option value="FBR">2</option>
-                                            </select>
+                                    <div class="col-md-6 mb-25">
+                                        <input type="text" name="prenom" class="form-control ih-medium ip-gray radius-xs b-light px-15"
+                                               placeholder="prenom">
+                                    </div>
+                                    <div class="col-md-6 mb-25">
+                                        <input type="text" name="email" class="form-control ih-medium ip-gray radius-xs b-light px-15"
+                                               placeholder="Email">
+                                    </div>
+                                    <div class="col-md-6 mb-25">
+                                        <input type="text" name="cin" class="form-control ih-medium ip-gray radius-xs b-light px-15"
+                                               placeholder="cin">
+                                    </div>
+
+                                    <!--<div class="form-group col-md-6 mb-25">
+                                        <select class="form-control px-15" id="exampleFormControlSelect1">
+                                            <option>Employer</option>
+                                            <option>Manager</option>
+                                        </select>
+                                    </div>-->
+
+                                    <div class="form-group col-md-6 mb-25">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="layout-button mt-0">
+                                            <button type="button"
+                                                    class="btn btn-default btn-squared border-normal bg-normal px-20 ">
+                                                cancel
+                                            </button>
+                                            <button type="submit" class="btn btn-primary btn-default btn-squared px-30">
+                                                save
+                                            </button>
                                         </div>
                                     </div>
-                                    <div class="form-group mb-20">
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                                                  placeholder="Project description"></textarea>
-                                    </div>
-                                    <div class="form-group textarea-group">
-                                        <label class="mb-15">status</label>
-                                        <div class="d-flex">
-                                            <div class="project-task-list__left d-flex align-items-center">
-                                                <div class="checkbox-group d-flex mr-50 pr-10">
-                                                    <div
-                                                        class="checkbox-theme-default custom-checkbox checkbox-group__single d-flex">
-                                                        <input class="checkbox" type="checkbox" id="check-grp-1"
-                                                               checked>
-                                                        <label for="check-grp-1"
-                                                               class="fs-14 color-light strikethrough">
-                                                            status
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="checkbox-group d-flex mr-50 pr-10">
-                                                    <div
-                                                        class="checkbox-theme-default custom-checkbox checkbox-group__single d-flex">
-                                                        <input class="checkbox" type="checkbox" id="check-grp-2">
-                                                        <label for="check-grp-2"
-                                                               class="fs-14 color-light strikethrough">
-                                                            Deactivated
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="checkbox-group d-flex">
-                                                    <div
-                                                        class="checkbox-theme-default custom-checkbox checkbox-group__single d-flex">
-                                                        <input class="checkbox" type="checkbox" id="check-grp-3">
-                                                        <label for="check-grp-3"
-                                                               class="fs-14 color-light strikethrough">
-                                                            bloked
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mb-25">
-                                        <div class="form-group mb-10">
-                                            <label for="name47">project member</label>
-                                            <input type="text" class="form-control" id="name47"
-                                                   placeholder="Search members">
-                                        </div>
-                                        <ul class="d-flex flex-wrap mb-20 user-group-people__parent">
-                                            <li>
-                                                <a href="#"><img class="rounded-circle wh-34" src="img/tm1.png"
-                                                                 alt="author"></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><img class="rounded-circle wh-34" src="img/tm2.png"
-                                                                 alt="author"></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><img class="rounded-circle wh-34" src="img/tm3.png"
-                                                                 alt="author"></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><img class="rounded-circle wh-34" src="img/tm4.png"
-                                                                 alt="author"></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><img class="rounded-circle wh-34" src="img/tm5.png"
-                                                                 alt="author"></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="d-flex new-member-calendar">
-                                        <div class="form-group w-100 mr-sm-15 form-group-calender">
-                                            <label for="datepicker">start Date</label>
-                                            <div class="position-relative">
-                                                <input type="text" class="form-control" id="datepicker"
-                                                       placeholder="mm/dd/yyyy">
-                                                <a href="#">
-                                                    <span data-feather="calendar"></span></a>
-                                            </div>
-                                        </div>
-                                        <div class="form-group w-100 form-group-calender">
-                                            <label for="datepicker2">End Date</label>
-                                            <div class="position-relative">
-                                                <input type="text" class="form-control" id="datepicker2"
-                                                       placeholder="mm/dd/yyyy">
-                                                <a href="#">
-                                                    <span data-feather="calendar"></span></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="button-group d-flex pt-25">
-
-
-                                        <button class="btn btn-primary btn-default btn-squared text-capitalize">add new
-                                            project
-                                        </button>
-
-
-                                        <button
-                                            class="btn btn-light btn-default btn-squared fw-400 text-capitalize b-light color-light">
-                                            cancel
-                                        </button>
-
-
-                                    </div>
-
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -164,8 +83,6 @@
         </div>
     </div>
 
-    </div>
-    </div>
     <div class="row">
         <div class="col-lg-12">
             <div class="userDatatable global-shadow border p-30 bg-white radius-xl w-100 mb-30">
@@ -181,19 +98,13 @@
                                 <span class="userDatatable-title">nom</span>
                             </th>
                             <th>
-                                <span class="userDatatable-title">Address</span>
+                                <span class="userDatatable-title">Email</span>
                             </th>
                             <th>
-                                <span class="userDatatable-title">Téléphone</span>
+                                <span class="userDatatable-title">Cin</span>
                             </th>
                             <th>
-                                <span class="userDatatable-title">E-mail personnel</span>
-                            </th>
-                            <th>
-                                <span class="userDatatable-title">Type de contrat</span>
-                            </th>
-                            <th>
-                                <span class="userDatatable-title">CIN</span>
+                                <span class="userDatatable-title">Role</span>
                             </th>
                             <th>
                                 <span class="userDatatable-title ">action</span>
@@ -202,92 +113,77 @@
                         </thead>
                         <tbody>
 
-                            @foreach ($employer as $list)
+                        @foreach ($user as $list)
 
-                        <tr>
-
-
-        <td>
-            <div class="userDatatable-content">
-                {{ $list->id }}
-        </div>
-           </td>
-           <td>
-            <div class="userDatatable-content">
-                {{ $list->upload }}
-        </div>
-           </td>
-           <td>
-           <h2 class="table-avatar">
-            <a href="employer-details.html" class="avatar avatar-sm me-2">
-                <img class="avatar-img rounded-circle" src="{{ asset('employer-photos/'.$list->upload) }}" alt="User Image">
-            </a>
-
-            <a href="employer-details.html">{{ $list->Nom }} {{ $list->Prenom }}</a>
-        </h2>
-           </td>
-        <td>
-            <div class="userDatatable-content">
-                {{ $list->Telephone }}
-            </div>
-            </td>
-            <td>
-                <div class="userDatatable-content">
-                    {{ $list->Adresse }}
-                </div>
-                </td>
-        <td>
-            <div class="userDatatable-content">
-                {{ $list->Telephone }}
-            </div>
-            </td>
-        <td>
-            <div class="userDatatable-content">
-                {{ $list->EmailPersonnel }}
-            </div>
-        </td>
-        <td>
-            <div class="userDatatable-content">
-            {{ $list->TypeDeContrat }}
-            </div>
-        </td>
-        <td>
-            <div class="userDatatable-content">
-            {{ $list->cin }}
-            </div>
-        </td>
+                            <tr>
 
 
-
-                            <td>
-                                <div class="userDatatable-content">
-                                <ul class="orderDatatable_actions mb-0 d-flex flex-wrap">
-                                    <form action="{{ route('employer.destroy',$list->id) }}" method="Post" style="display: inline-flex;">
-                                    <li>
-                                        <a href="#" class="view">
-                                            <span data-feather="eye"></span></a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('employer.edit',$list->id) }}" class="edit">
-                                            <span data-feather="edit"></span></a>
-                                    </li>
-                                    <li>
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="remove">
-                                            <span data-feather="trash-2"></span></a>
-                                    </li>
-                                    </form>
-                                </ul>
-                                </div>
-                            </td>
-                        </tr>
+                                <td>
+                                    <div class="userDatatable-content">
+                                        {{ $list->id }}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="userDatatable-content">
+                                        {{ $list->name }}  {{ $list->prenom }}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="userDatatable-content">
+                                        {{ $list->email }}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="userDatatable-content">
+                                        {{ $list->cin }}
+                                    </div>
+                                </td>
+                                <td>
+                                    @if ($list->role === 'employer')
+                                        <div class="userDatatable-content d-inline-block">
+                                        <span
+                                            class="bg-opacity-success  color-success rounded-pill userDatatable-content-status active">{{ $list->role }}</span>
+                                        </div>
+                                    @elseif ($list->role === 'Manager')
+                                        <div class="userDatatable-content d-inline-block">
+                                        <span
+                                            class="bg-opacity-warning  color-warning rounded-pill userDatatable-content-status active"> {{ $list->role }}</span>
+                                        </div>
+                                    @else
+                                        <div class="userDatatable-content d-inline-block">
+                                            <span class="bg-opacity-danger  color-danger rounded-pill userDatatable-content-status active">Admin</span>
+                                        </div>
+                                    @endif
+                                </td>
+                                <td>
+                                    <div class="userDatatable-content">
+                                        <ul class="orderDatatable_actions mb-0 d-flex flex-wrap">
+                                            <form action="{{ route('employer.destroy',$list->id) }}" method="Post" style="display: inline-flex;">
+                                                <li>
+                                                    <a href="#" class="view">
+                                                        <span data-feather="eye"></span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ route('employer.edit',$list->id) }}" class="edit">
+                                                        <span data-feather="edit"></span></a>
+                                                </li>
+                                                <li>
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <a href="#" class="remove">
+                                                        <span data-feather="trash-2"></span></a>
+                                                </li>
+                                            </form>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
 
                         @endforeach
 
                         </tbody>
                     </table>
-                    {!! $employer->links() !!}
+                    {!! $user->links() !!}
                 </div>
                 <div class="d-flex justify-content-end pt-30">
 

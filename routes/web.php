@@ -1,9 +1,15 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\DepartmentController;
-use App\Http\Controllers\employerController;
+use App\Http\Controllers\EmployeeDashboardController;
+use App\Http\Controllers\EmployerController;
+use App\Http\Controllers\ManagerDashboardController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,34 +21,60 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::view('/', 'auth.login')->name('home');
-
 Auth::routes();
+Route::get('/index', function () {
+    return view('dashboard/confirmer');
+});
+Route::get('/index1', function () {
+    return view('dashboard/confirmer1');
+});
+Route::get('/index4', function () {
+    return view('dashboard/finalment');
+});
+//Route::get('/index', 'HomeController@index')->name('dashboard.confirmer1');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::resource('configuration', ConfigurationController::class);
 
-// ---------------------------------------------------------------------------------------------------
+/************************  change-password  ********************************/
+Route::group(['middleware' => 'auth'], function ()
+{
+    Route::get('/change-password', [UserController::class, 'changePassword'])->name('changePassword');
+    Route::post('/change-password', [UserController::class, 'changePasswordSave'])->name('postChangePassword');
+});
+/************************  fi chane-password  ********************************/
 
-Route::group(['prefix' => 'student', 'as'=>'student.', 'middleware' => ['auth','isStudent','backNotAllowed']],function () {
-    Route::get('profile', 'StudentController@show')->name('profile');
-    Route::put('update', 'StudentController@update')->name('update');
-    Route::get('pdf', 'StudentController@pdf')->name('pdf');
-    Route::get('notes', [NotesController::class, 'index'])->name('notes');
+
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin/dashboard', [AdminDashboardController::class, 'showDashboard']);
 });
 
-Route::resource('admin', AdminController::class)->except([
-    'create','edit','update'
-])->middleware(['auth','isAdmin','backNotAllowed']);
+Route::middleware(['auth', 'role:employee'])->group(function () {
+    Route::get('/employee/dashboard', [EmployeeDashboardController::class, 'showDashboard']);
+});
 
-Route::put('admin', 'AdminController@update')->name('admin.update');
+Route::middleware(['auth', 'role:manager'])->group(function () {
+    Route::get('/manager/dashboard', [ManagerDashboardController::class, 'showDashboard']);
+});
 
 
-Route::get('/admin/delete/{id}', function ($id){
-    return view('admin.delete',['id' => $id]);
-})->name('admin.deleteView');
+Route::resource('department', DepartmentController::class);
+//Route::resource('department', AdminController::class);
+Route::resource('employer', AdminController::class);
+Route::resource('employer', EmployerController::class);
+/*
+Route::controller(EmployerController::class)->group(function () {
+    Route::get('/home', 'index')->middleware('auth')->name('employer.index');
+    Route::get('/employer', 'conf')->middleware('auth')->name('employer.confirmer1');
+    Route::get('employer/index')->middleware('auth');
+    Route::get('dashboard/confirmer1')->middleware('auth');
+    Route::get('dashboard/confirmer2')->middleware('auth');
+});
+*/
 
-Route::delete('/admin/delete2/{id}', 'AdminController@delete2')->name('admin.delete2');
 
-Route::fallback(function(){
-    return view('page404');
+//Route::get('/', [HomeController::class, 'index'])->name('dashboard.home');
+
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard/home');
+Route::group(['middleware' => 'superadmin'], function () {
 });

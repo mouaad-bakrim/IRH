@@ -36,7 +36,6 @@ class Employer extends Model
      'PeriodeDeStage',
      'dateDeConfirmation',
      'upload',
-     'password'
  ];
 
 

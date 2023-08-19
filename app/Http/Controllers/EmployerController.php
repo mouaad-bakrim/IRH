@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\PasswordCreated;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\employer;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
 
 class employerController extends Controller
 {
@@ -17,8 +16,8 @@ class employerController extends Controller
      */
     public function index()
     {
-        $employer = employer::orderBy('id','desc')->paginate(5);
-        return view('employer.index', compact('employer'));
+        $user = user::orderBy('id','desc')->paginate(5);
+        return view('employer.index', compact('user'));
     }
 
     /**
@@ -28,7 +27,8 @@ class employerController extends Controller
      */
     public function create()
     {
-        return view('employer.create');
+        $role = DB::table('role_type_users')->get();
+        return view('employer.create',compact('role'));
     }
 
     /**
@@ -81,8 +81,8 @@ class employerController extends Controller
     public function update(Request $request, employer $employer)
     {
         $request->validate([
-            'Nom'    => 'required|string',
-            'upload'        => 'required|image',
+            'nom' => 'required',
+            'description' => 'required',
         ]);
 
         $employer->fill($request->post())->save();
@@ -102,18 +102,13 @@ class employerController extends Controller
         return redirect()->route('employer.index')->with('success', 'employer has been deleted successfully');
     }
 
-
-    public function createPassword(Request $request, employer $employer)
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function conf()
     {
-        $password = Str::random(8); // Génère un mot de passe aléatoire de 8 caractères
-
-        $employer->update([
-            'password' => Hash::make($password)
-        ]);
-
-        // Envoyer le mot de passe par e-mail
-        Mail::to($employer->email)->send(new PasswordCreated($password));
-
-        return redirect()->route('employer.index')->with('success', 'Mot de passe créé et envoyé par e-mail.');
+        return view('employer.confirmer1');
     }
 }

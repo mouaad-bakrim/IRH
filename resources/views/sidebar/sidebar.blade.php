@@ -35,11 +35,13 @@
                         <li>
                             <a class="" href="inbox.html">Table de bord</a>
                         </li>
+                        @if (Session::get('isAdmin') === '1')  @endif
+                            <li>
+                                <a href="{{ route('employer.create') }}">Add Employer</a>
+                            </li>
+
                         <li>
-                            <a class="" href="{{route('employer.index')}}">List des Employer</a>
-                        </li>
-                        <li>
-                            <a class="" href="{{route('employer.create')}}">Add Employer</a>
+                            <a href="{{ route('employer.index') }}">List des Employer</a>
                         </li>
                         <li>
                             <a class="" href="">Edit Employer</a>
@@ -65,9 +67,9 @@
                         <li>
                             <a href="{{route('department.index')}}" class="">List des Department</a>
                         </li>
-                        <li>
+                      <!--  <li>
                             <a href="{{route('department.create')}}" class="">Add Department</a>
-                        </li>
+                        </li>-->
                     </ul>
                 </li>
 

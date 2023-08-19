@@ -29,7 +29,7 @@
                     @endif
                     <form action="{{ route('department.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-
+                    <form>
                         <div class="row">
                             <div class="col-12">
                                 <h5 class="form-title"><span>Department Details</span></h5>
@@ -88,7 +88,9 @@
             </div>
         </div>
     </div>
-
-
+</div>
+</div>
+</div>
+</div>
 
 @endsection

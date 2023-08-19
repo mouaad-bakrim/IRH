@@ -32,120 +32,50 @@
                         </div>
                         <div class="modal-body">
                             <div class="new-member-modal">
-                                <form>
+                                @if(session('status'))
+                                    <div class="alert alert-success mb-1 mt-1">
+                                        {{ session('status') }}
+                                    </div>
+                                @endif
+                                <form action="{{ route('department.store') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+
                                     <div class="form-group mb-20">
-                                        <input type="text" class="form-control" placeholder="Duran Clayton">
+                                        <input type="text" name="nom" class="form-control" placeholder="nom">
+                                        @error('nom')
+                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group mb-20">
+                                        <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"
+                                                  placeholder=" description"></textarea>
+                                        @error('description')
+                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="form-group mb-20">
-                                        <div class="category-member">
-                                            <select class="js-example-basic-single js-states form-control"
-                                                    id="category-member">
-                                                <option value="JAN">1</option>
-                                                <option value="FBR">2</option>
-                                            </select>
-                                        </div>
+                                        <input type="text" name="type" class="form-control" placeholder="Type">
+                                        @error('type')
+                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="form-group mb-20">
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                                                  placeholder="Project description"></textarea>
+                                        <input type="text" name="plase" class="form-control" placeholder="la plase Department">
+                                        @error('plase')
+                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                        @enderror
                                     </div>
-                                    <div class="form-group textarea-group">
-                                        <label class="mb-15">status</label>
-                                        <div class="d-flex">
-                                            <div class="project-task-list__left d-flex align-items-center">
-                                                <div class="checkbox-group d-flex mr-50 pr-10">
-                                                    <div
-                                                        class="checkbox-theme-default custom-checkbox checkbox-group__single d-flex">
-                                                        <input class="checkbox" type="checkbox" id="check-grp-1"
-                                                               checked>
-                                                        <label for="check-grp-1"
-                                                               class="fs-14 color-light strikethrough">
-                                                            status
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="checkbox-group d-flex mr-50 pr-10">
-                                                    <div
-                                                        class="checkbox-theme-default custom-checkbox checkbox-group__single d-flex">
-                                                        <input class="checkbox" type="checkbox" id="check-grp-2">
-                                                        <label for="check-grp-2"
-                                                               class="fs-14 color-light strikethrough">
-                                                            Deactivated
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="checkbox-group d-flex">
-                                                    <div
-                                                        class="checkbox-theme-default custom-checkbox checkbox-group__single d-flex">
-                                                        <input class="checkbox" type="checkbox" id="check-grp-3">
-                                                        <label for="check-grp-3"
-                                                               class="fs-14 color-light strikethrough">
-                                                            bloked
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mb-25">
-                                        <div class="form-group mb-10">
-                                            <label for="name47">project member</label>
-                                            <input type="text" class="form-control" id="name47"
-                                                   placeholder="Search members">
-                                        </div>
-                                        <ul class="d-flex flex-wrap mb-20 user-group-people__parent">
-                                            <li>
-                                                <a href="#"><img class="rounded-circle wh-34" src="img/tm1.png"
-                                                                 alt="author"></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><img class="rounded-circle wh-34" src="img/tm2.png"
-                                                                 alt="author"></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><img class="rounded-circle wh-34" src="img/tm3.png"
-                                                                 alt="author"></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><img class="rounded-circle wh-34" src="img/tm4.png"
-                                                                 alt="author"></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><img class="rounded-circle wh-34" src="img/tm5.png"
-                                                                 alt="author"></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="d-flex new-member-calendar">
-                                        <div class="form-group w-100 mr-sm-15 form-group-calender">
-                                            <label for="datepicker">start Date</label>
-                                            <div class="position-relative">
-                                                <input type="text" class="form-control" id="datepicker"
-                                                       placeholder="mm/dd/yyyy">
-                                                <a href="#">
-                                                    <span data-feather="calendar"></span></a>
-                                            </div>
-                                        </div>
-                                        <div class="form-group w-100 form-group-calender">
-                                            <label for="datepicker2">End Date</label>
-                                            <div class="position-relative">
-                                                <input type="text" class="form-control" id="datepicker2"
-                                                       placeholder="mm/dd/yyyy">
-                                                <a href="#">
-                                                    <span data-feather="calendar"></span></a>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                     <div class="button-group d-flex pt-25">
 
 
-                                        <button class="btn btn-primary btn-default btn-squared text-capitalize">add new
-                                            project
+                                        <button type="submit" class="btn btn-primary btn-default btn-squared text-capitalize">add new
+                                            Department
                                         </button>
 
 
-                                        <button
-                                            class="btn btn-light btn-default btn-squared fw-400 text-capitalize b-light color-light">
+                                        <button class="btn btn-light btn-default btn-squared fw-400 text-capitalize b-light color-light">
                                             cancel
                                         </button>
 
@@ -164,8 +94,6 @@
         </div>
     </div>
 
-    </div>
-    </div>
     <div class="row">
         <div class="col-lg-12">
             <div class="userDatatable global-shadow border p-30 bg-white radius-xl w-100 mb-30">

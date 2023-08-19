@@ -1041,8 +1041,12 @@
                                     <img src="{{ asset('img/author-nav.jpg')}}" alt="" class="rounded-circle">
                                 </div>
                                 <div>
-                                    <h6> {{ Auth::user()->name }}</h6>
-                                    <span>UI Designer</span>
+                                    @if (Auth::check())
+                                        <h6> {{ Auth::user()->name }}</h6>
+                                    @else
+                                        <p>Utilisateur non connecté</p>
+                                    @endif
+                                        <span>UI Designer</span>
                                 </div>
                             </div>
                             <div class="nav-author__options">
