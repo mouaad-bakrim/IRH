@@ -37,7 +37,7 @@
                         </li>
                         @if (Session::get('isAdmin') === '1')  @endif
                             <li>
-                                <a href="{{ route('employer.create') }}">Add Employer</a>
+                                <a href="{{ route('employees.create') }}">Add Employer</a>
                             </li>
 
                         <li>
@@ -62,14 +62,27 @@
                     </a>
                     <ul>
                         <li>
-                            <a href="products.html" class="">Table de bord</a>
+                            <a href="{{route('absence.index')}}" class="">Table de bord</a>
                         </li>
                         <li>
                             <a href="{{route('department.index')}}" class="">List des Department</a>
                         </li>
-                      <!--  <li>
-                            <a href="{{route('department.create')}}" class="">Add Department</a>
-                        </li>-->
+
+                    </ul>
+                </li>    <li class="has-child">
+                    <a href="#" class="">
+                        <span data-feather="shopping-cart" class="nav-icon"></span>
+                        <span class="menu-text">Profession</span>
+                        <span class="toggle-icon"></span>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="products.html" class="">Table de bord</a>
+                        </li>
+                        <li>
+                            <a href="{{route('Profession.index')}}" class="">List des Profession</a>
+                        </li>
+
                     </ul>
                 </li>
 
@@ -100,17 +113,20 @@
                     </ul>
                 </li>
                 <li class="has-child">
-                    <a href="note.html" class="">
-                        <span data-feather="file-text" class="nav-icon"></span>
-                        <span class="menu-text">Gestion des absences</span>
+                    <a href="#" class="">
+                        <span data-feather="shopping-cart" class="nav-icon"></span>
+                        <span class="menu-text">Absence</span>
                         <span class="toggle-icon"></span>
                     </a>
-                <ul>
-                    <li>
-                        <a class="" href="contact-2.html">Table de bord</a>
-                    </li>
+                    <ul>
+                        <li>
+                            <a href="{{route('document.index')}}" class="">Table de bord</a>
+                        </li>
+                        <li>
+                            <a href="{{route('absence.index')}}" class="">List des Absence</a>
+                        </li>
 
-                </ul>
+                    </ul>
                 </li>
                 <li class="has-child">
                     <a href="kanban.html" class="">

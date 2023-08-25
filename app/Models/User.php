@@ -12,7 +12,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-    use HasRoles;
+  //  use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -25,10 +25,22 @@ class User extends Authenticatable
         'cin',
         'email',
         'contrat',
+        'status',
         'password',
         'role',
+        'Profession_id',
+        'SalaireNet',
+        'SalaireBrut',
+        'PeriodeDeStage',
     ];
 
+    public function profession()
+    {
+        return $this->belongsTo(Profession::class);
+    } public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
     public function isAdmin()
     {
         return $this->role === 'admin';

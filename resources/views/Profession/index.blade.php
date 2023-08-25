@@ -4,8 +4,8 @@
     <div class="breadcrumb-main user-member justify-content-sm-between ">
         <div class=" d-flex flex-wrap justify-content-center breadcrumb-main__wrapper">
             <div class="d-flex align-items-center user-member__title justify-content-center mr-sm-25">
-                <h4 class="text-capitalize fw-500 breadcrumb-title">list employer</h4>
-                <span class="sub-title ml-sm-25 pl-sm-25">274 employer</span>
+                <h4 class="text-capitalize fw-500 breadcrumb-title">list Profession</h4>
+                <span class="sub-title ml-sm-25 pl-sm-25">274 Profession</span>
             </div>
 
             <form action="/" class="d-flex align-items-center user-member__form my-sm-0 my-2">
@@ -15,9 +15,11 @@
             </form>
 
         </div>
+        <!------------------ajoute Profession --------------->
+
         <div class="action-btn">
             <a href="#" class="btn px-15 btn-primary" data-toggle="modal" data-target="#new-member">
-                <i class="las la-plus fs-16"></i>Add New employer</a>
+                <i class="las la-plus fs-16"></i>Add New Profession</a>
 
             <!-- Modal -->
             <div class="modal fade new-member" id="new-member" role="dialog" tabindex="-1"
@@ -30,49 +32,74 @@
                                 <span data-feather="x"></span>
                             </button>
                         </div>
-                        <div class="card-body py-md-30">
-                            <form method="post" action="{{ route('department.store') }}">
-                                @csrf
-                                <div class="row">
-                                    <div class="col-md-6 mb-25">
-                                        <input type="text" name="name" class="form-control ih-medium ip-gray radius-xs b-light px-15"
-                                               placeholder="name">
+                        <div class="modal-body">
+                            <div class="new-member-modal">
+                                @if(session('status'))
+                                    <div class="alert alert-success mb-1 mt-1">
+                                        {{ session('status') }}
                                     </div>
-                                    <div class="col-md-6 mb-25">
-                                        <input type="text" name="prenom" class="form-control ih-medium ip-gray radius-xs b-light px-15"
-                                               placeholder="prenom">
-                                    </div>
-                                    <div class="col-md-6 mb-25">
-                                        <input type="text" name="email" class="form-control ih-medium ip-gray radius-xs b-light px-15"
-                                               placeholder="Email">
-                                    </div>
-                                    <div class="col-md-6 mb-25">
-                                        <input type="text" name="cin" class="form-control ih-medium ip-gray radius-xs b-light px-15"
-                                               placeholder="cin">
+                                @endif
+                                <form action="{{ route('Profession.store') }}" method="POST"
+                                      enctype="multipart/form-data">
+                                    @csrf
+
+                                    <div class="form-group mb-20">
+                                        <input type="text" name="nom" class="form-control" placeholder="nom">
+                                        @error('nom')
+                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                        @enderror
                                     </div>
 
-                                    <!--<div class="form-group col-md-6 mb-25">
-                                        <select class="form-control px-15" id="exampleFormControlSelect1">
-                                            <option>Employer</option>
-                                            <option>Manager</option>
+                                    <div class="form-group mb-20">
+                                        <textarea class="form-control" name="description"
+                                                  id="exampleFormControlTextarea1" rows="3"
+                                                  placeholder=" description"></textarea>
+                                        @error('description')
+                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group mb-20">
+                                        <input type="text" name="salare" class="form-control" placeholder="salare">
+                                        @error('salare')
+                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group mb-20">
+                                        <input type="text" name="Requirements" class="form-control"
+                                               placeholder="Requirements">
+                                        @error('Requirements')
+                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+
+                                    <div class="form-group mb-20">
+                                        <select class="form-control select " name="department_id">
+                                            <option selected disabled>Select Department:</option>
+                                            @foreach($departments as $department)
+                                                <option value="{{ $department->id }}">{{ $department->nom }}</option>
+                                            @endforeach
                                         </select>
-                                    </div>-->
+                                    </div>
+                                    <div class="button-group d-flex pt-25">
 
-                                    <div class="form-group col-md-6 mb-25">
+
+                                        <button type="submit"
+                                                class="btn btn-primary btn-default btn-squared text-capitalize">add new
+                                            Profession
+                                        </button>
+
+
+                                        <button
+                                            class="btn btn-light btn-default btn-squared fw-400 text-capitalize b-light color-light">
+                                            cancel
+                                        </button>
+
+
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="layout-button mt-0">
-                                            <button type="button"
-                                                    class="btn btn-default btn-squared border-normal bg-normal px-20 ">
-                                                cancel
-                                            </button>
-                                            <button type="submit" class="btn btn-primary btn-default btn-squared px-30">
-                                                save
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
+
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -81,8 +108,10 @@
 
 
         </div>
-    </div>
 
+
+    </div>
+    <!-------------------        Liste Profession         -------->
     <div class="row">
         <div class="col-lg-12">
             <div class="userDatatable global-shadow border p-30 bg-white radius-xl w-100 mb-30">
@@ -98,13 +127,16 @@
                                 <span class="userDatatable-title">nom</span>
                             </th>
                             <th>
-                                <span class="userDatatable-title">Email</span>
+                                <span class="userDatatable-title">Description</span>
                             </th>
                             <th>
-                                <span class="userDatatable-title">Cin</span>
+                                <span class="userDatatable-title">salare</span>
                             </th>
                             <th>
-                                <span class="userDatatable-title">Role</span>
+                                <span class="userDatatable-title">Requirements</span>
+                            </th>
+                            <th>
+                                <span class="userDatatable-title">department</span>
                             </th>
                             <th>
                                 <span class="userDatatable-title ">action</span>
@@ -113,58 +145,54 @@
                         </thead>
                         <tbody>
 
-                        @foreach ($user as $list)
+                        @foreach ($professions as $profession)
 
                             <tr>
 
 
                                 <td>
                                     <div class="userDatatable-content">
-                                        {{ $list->id }}
+                                        {{ $profession->id }}
                                     </div>
                                 </td>
                                 <td>
                                     <div class="userDatatable-content">
-                                        {{ $list->name }}  {{ $list->prenom }}
+                                        {{ $profession->nom }}
                                     </div>
                                 </td>
                                 <td>
                                     <div class="userDatatable-content">
-                                        {{ $list->email }}
+                                        {{ $profession->description }}
                                     </div>
                                 </td>
                                 <td>
                                     <div class="userDatatable-content">
-                                        {{ $list->cin }}
+                                        {{ $profession->salare }}
                                     </div>
                                 </td>
                                 <td>
-                                    @if ($list->role === 'Employer')
-                                        <div class="userDatatable-content d-inline-block">
-                                        <span
-                                            class="bg-opacity-success  color-success rounded-pill userDatatable-content-status active">{{ $list->role }}</span>
-                                        </div>
-                                    @elseif ($list->role === 'Manager')
-                                        <div class="userDatatable-content d-inline-block">
-                                        <span
-                                            class="bg-opacity-warning  color-warning rounded-pill userDatatable-content-status active"> {{ $list->role }}</span>
-                                        </div>
-                                    @else
-                                        <div class="userDatatable-content d-inline-block">
-                                            <span class="bg-opacity-danger  color-danger rounded-pill userDatatable-content-status active">Admin</span>
-                                        </div>
-                                    @endif
+                                    <div class="userDatatable-content">
+                                        {{ $profession->Requirements }}
+                                    </div>
                                 </td>
+                                <td>
+                                    <div class="userDatatable-content">
+                                        {{ $profession->department->nom }}
+                                    </div>
+                                </td>
+
+
                                 <td>
                                     <div class="userDatatable-content">
                                         <ul class="orderDatatable_actions mb-0 d-flex flex-wrap">
-                                            <form action="{{ route('employer.destroy',$list->id) }}" method="Post" style="display: inline-flex;">
+                                            <form action="{{ route('Profession.destroy',$profession->id) }}" method="Post"
+                                                  style="display: inline-flex;">
                                                 <li>
                                                     <a href="#" class="view">
                                                         <span data-feather="eye"></span></a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{ route('employer.edit',$list->id) }}" class="edit">
+                                                    <a href="{{ route('Profession.edit',$profession->id) }}" class="edit">
                                                         <span data-feather="edit"></span></a>
                                                 </li>
                                                 <li>
@@ -183,7 +211,7 @@
 
                         </tbody>
                     </table>
-                    {!! $user->links() !!}
+
                 </div>
                 <div class="d-flex justify-content-end pt-30">
 
@@ -217,7 +245,6 @@
             </div>
         </div>
     </div>
-
 
 @endsection
 

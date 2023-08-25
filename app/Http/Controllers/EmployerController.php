@@ -19,6 +19,15 @@ class employerController extends Controller
         $user = user::orderBy('id','desc')->paginate(5);
         return view('employer.index', compact('user'));
     }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ind()
+    {
+        return view('employer.confirmer1');
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -40,8 +49,12 @@ class employerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nom' => 'required',
-            'description' => 'required',
+            'name' => 'required|string',
+            'prenom' => 'required|string',
+            'role' => 'required|string',
+            // 'contrat' => 'required|string',
+            'cin' => 'required|string',
+            'email' => 'required|email|unique:users,email',
         ]);
 
         employer::create($request->post());
@@ -81,8 +94,12 @@ class employerController extends Controller
     public function update(Request $request, employer $employer)
     {
         $request->validate([
-            'nom' => 'required',
-            'description' => 'required',
+            'name' => 'required|string',
+            'prenom' => 'required|string',
+            'role' => 'required|string',
+            // 'contrat' => 'required|string',
+            'cin' => 'required|string',
+            'email' => 'required|email|unique:users,email',
         ]);
 
         $employer->fill($request->post())->save();

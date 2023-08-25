@@ -21,7 +21,10 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('role')->nullable();
+            $table->string('status')->nullable();
             $table->string('contrat')->nullable();
+            $table->unsignedBigInteger('profession_id');
+            $table->foreign('profession_id')->references('id')->on('professions');
             $table->rememberToken();
             $table->timestamps();
         });

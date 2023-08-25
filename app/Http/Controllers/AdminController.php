@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\profession;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -12,8 +14,10 @@ class AdminController extends Controller
 
     public function create()
     {
+        $professions = Profession::all();
         $role = DB::table('role_type_users')->get();
-        return view('employer.create',compact('role'));
+        $contrat = DB::table('role_type_employees')->get();
+        return view('employees.create',compact('role','contrat','professions'));
     }
 
     public function store(Request $request)
@@ -24,6 +28,7 @@ class AdminController extends Controller
             'role' => 'required|string',
             'contrat' => 'required|string',
             'cin' => 'required|string',
+            'profession_id' => 'required|string',
             'email' => 'required|email|unique:users,email',
         ]);
 
@@ -32,6 +37,6 @@ class AdminController extends Controller
 
         User::create($data);
 
-        return redirect()->route('employer.create')->with('success', 'Employé/gestionnaire créé avec succès.');
+        return redirect()->route('employer.index')->with('success', 'Employé/gestionnaire créé avec succès.');
     }
 }

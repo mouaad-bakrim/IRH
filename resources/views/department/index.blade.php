@@ -15,6 +15,8 @@
             </form>
 
         </div>
+        <!------------------ajoute department --------------->
+
         <div class="action-btn">
             <a href="#" class="btn px-15 btn-primary" data-toggle="modal" data-target="#new-member">
                 <i class="las la-plus fs-16"></i>Add New Department</a>
@@ -37,7 +39,8 @@
                                         {{ session('status') }}
                                     </div>
                                 @endif
-                                <form action="{{ route('department.store') }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('department.store') }}" method="POST"
+                                      enctype="multipart/form-data">
                                     @csrf
 
                                     <div class="form-group mb-20">
@@ -48,7 +51,8 @@
                                     </div>
 
                                     <div class="form-group mb-20">
-                                        <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"
+                                        <textarea class="form-control" name="description"
+                                                  id="exampleFormControlTextarea1" rows="3"
                                                   placeholder=" description"></textarea>
                                         @error('description')
                                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
@@ -61,21 +65,32 @@
                                         @enderror
                                     </div>
                                     <div class="form-group mb-20">
-                                        <input type="text" name="plase" class="form-control" placeholder="la plase Department">
+                                        <input type="text" name="plase" class="form-control"
+                                               placeholder="la plase Department">
                                         @error('plase')
                                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                                         @enderror
+                                    </div>
+                                    <div class="form-group mb-20">
+                                        <select class="form-control select " name="user_id">
+                                            <option selected disabled>Select Employer:</option>
+                                            @foreach($users as $user)
+                                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
 
                                     <div class="button-group d-flex pt-25">
 
 
-                                        <button type="submit" class="btn btn-primary btn-default btn-squared text-capitalize">add new
+                                        <button type="submit"
+                                                class="btn btn-primary btn-default btn-squared text-capitalize">add new
                                             Department
                                         </button>
 
 
-                                        <button class="btn btn-light btn-default btn-squared fw-400 text-capitalize b-light color-light">
+                                        <button
+                                            class="btn btn-light btn-default btn-squared fw-400 text-capitalize b-light color-light">
                                             cancel
                                         </button>
 
@@ -92,8 +107,10 @@
 
 
         </div>
-    </div>
 
+
+    </div>
+    <!-------------------        Liste department         -------->
     <div class="row">
         <div class="col-lg-12">
             <div class="userDatatable global-shadow border p-30 bg-white radius-xl w-100 mb-30">
@@ -118,74 +135,84 @@
                                 <span class="userDatatable-title">plase</span>
                             </th>
                             <th>
+                                <span class="userDatatable-title">employer</span>
+                            </th>
+                            <th>
                                 <span class="userDatatable-title ">action</span>
                             </th>
                         </tr>
                         </thead>
                         <tbody>
 
-                            @foreach ($department as $company)
+                        @foreach ($departments as $department)
 
-                        <tr>
-
-
-        <td>
-            <div class="userDatatable-content">
-                {{ $company->id }}
-        </div>
-           </td>
-        <td>
-            <div class="userDatatable-content">
-                {{ $company->nom }}
-            </div>
-            </td>
-        <td>
-            <div class="userDatatable-content">
-                {{ $company->description }}
-            </div>
-            </td>
-        <td>
-            <div class="userDatatable-content">
-                {{ $company->type }}
-            </div>
-        </td>
-        <td>
-            <div class="userDatatable-content">
-            {{ $company->plase }}
-            </div>
-        </td>
+                            <tr>
 
 
+                                <td>
+                                    <div class="userDatatable-content">
+                                        {{ $department->id }}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="userDatatable-content">
+                                        {{ $department->nom }}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="userDatatable-content">
+                                        {{ $department->description }}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="userDatatable-content">
+                                        {{ $department->type }}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="userDatatable-content">
+                                        {{ $department->plase }}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="userDatatable-content">
+                                        {{ $department->user->name }}
+                                    </div>
+                                </td>
 
-                            <td>
-                                <div class="userDatatable-content">
-                                <ul class="orderDatatable_actions mb-0 d-flex flex-wrap">
-                                    <form action="{{ route('department.destroy',$company->id) }}" method="Post" style="display: inline-flex;">
-                                    <li>
-                                        <a href="#" class="view">
-                                            <span data-feather="eye"></span></a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('department.edit',$company->id) }}" class="edit">
-                                            <span data-feather="edit"></span></a>
-                                    </li>
-                                    <li>
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="remove">
-                                            <span data-feather="trash-2"></span></a>
-                                    </li>
-                                    </form>
-                                </ul>
-                                </div>
-                            </td>
-                        </tr>
+
+
+                                <td>
+                                    <div class="userDatatable-content">
+                                        <ul class="orderDatatable_actions mb-0 d-flex flex-wrap">
+                                            <form action="{{ route('department.destroy',$department->id) }}"
+                                                  method="Post" style="display: inline-flex;">
+                                                <li>
+                                                    <a href="#" class="view">
+                                                        <span data-feather="eye"></span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ route('department.edit',$department->id) }}"
+                                                       class="edit">
+                                                        <span data-feather="edit"></span></a>
+                                                </li>
+                                                <li>
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <a href="#" class="remove">
+                                                        <span data-feather="trash-2"></span></a>
+                                                </li>
+                                            </form>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
 
                         @endforeach
 
                         </tbody>
                     </table>
-                    {!! $department->links() !!}
+
                 </div>
                 <div class="d-flex justify-content-end pt-30">
 
@@ -219,7 +246,6 @@
             </div>
         </div>
     </div>
-
 
 @endsection
 

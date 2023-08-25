@@ -25,15 +25,16 @@ class HomeController extends Controller
     {
         $user = auth()->user();
 
-        if ($user->hasRole('admin')) {
-            return view('dashboard.admin');
-        } elseif ($user->hasRole('employer')) {
+        if ($user->isAdmin == 1) {
+            return view('dashboard.home');
+        } elseif ($user->isAdmin == 0) {
             return view('dashboard.employer');
-        } elseif ($user->hasRole('manager')) {
+
+        } elseif ($user->isAdmin == 0) {
             return view('dashboard.manager');
         } else {
-            return view('dashboard.home');
+            return view('dashboard.tout');
         }
-    }
+        }
 
 }

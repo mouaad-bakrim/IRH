@@ -1,11 +1,17 @@
 <?php
 
+use App\Http\Controllers\AbsenceController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\EmployeeDashboardController;
 use App\Http\Controllers\EmployerController;
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ManagerDashboardController;
+use App\Http\Controllers\ProfessionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -23,7 +29,7 @@ use App\Http\Controllers\HomeController;
 */
 Auth::routes();
 Route::get('/index', function () {
-    return view('dashboard/confirmer');
+    return view('dashboard/change-password');
 });
 Route::get('/index1', function () {
     return view('dashboard/confirmer1');
@@ -57,9 +63,13 @@ Route::middleware(['auth', 'role:manager'])->group(function () {
     Route::get('/manager/dashboard', [ManagerDashboardController::class, 'showDashboard']);
 });
 
+Route::post('professions', [ProfessionController::class, 'store'])->name('profession.store');
 
 Route::resource('department', DepartmentController::class);
-//Route::resource('department', AdminController::class);
+Route::resource('absence', AbsenceController::class);
+Route::resource('document', DocumentController::class);
+Route::resource('Profession', ProfessionController::class);
+Route::resource('employees', AdminController::class);
 Route::resource('employer', AdminController::class);
 Route::resource('employer', EmployerController::class);
 /*
@@ -78,3 +88,13 @@ Route::controller(EmployerController::class)->group(function () {
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard/home');
 Route::group(['middleware' => 'superadmin'], function () {
 });
+
+
+
+Route::get('view', [LanguageController::class, 'view'])->name('view');
+Route::get('language-change', [LanguageController::class, 'changeLanguage'])->name('changeLanguage');
+
+
+
+Route::resource('commandes', CommandeController::class);
+Route::resource('categories', CategorieController::class);

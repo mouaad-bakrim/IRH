@@ -1022,12 +1022,13 @@
                 <!-- ends: .nav-support -->
                 <li class="nav-flag-select">
                     <div class="dropdown-custom">
-                        <a href="javascript:;" class="nav-item-toggle"><img src="{{ asset('img/flag.png')}}" alt="" class="rounded-circle"></a>
-                        <div class="dropdown-wrapper dropdown-wrapper--small">
-                            <a href=""><img src="{{ asset('img/eng.png')}}" alt=""> English</a>
-                            <a href=""><img src="{{ asset('img/ger.png')}}" alt=""> German</a>
-                            <a href=""><img src="{{ asset('img/spa.png')}}" alt=""> Spanish</a>
-                            <a href=""><img src="{{ asset('img/tur.png')}}" alt=""> Turkish</a>
+                        <a href="javascript:" class="nav-item-toggle">
+                            <img src="{{ asset('img/flag.png')}}" alt="" class="rounded-circle">
+                        </a>
+                        <div class="dropdown-wrapper dropdown-wrapper--small" name="language">
+                            <a href=""><img value="en" src="{{ asset('img/eng.png')}}" {{ \Session::get('language') == 'en' ? 'selected' : '' }} alt=""> English</a>
+                            <a href=""><img value="fr" src="{{ asset('img/ger.png')}}" {{ \Session::get('language') == 'fr' ? 'selected' : '' }} alt=""> France</a>
+                            <a href=""><img value="ar" src="{{ asset('img/spa.png')}}" {{ \Session::get('language') == 'ar' ? 'selected' : '' }} alt=""> arabe</a>
                         </div>
                     </div>
                 </li>
@@ -1154,6 +1155,15 @@
         </span>
 </div>
 <div class="overlay-dark-sidebar"></div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('select[name=language]').change(function() {
+            var lang = $(this).val();
+            window.location.href = "{{ route('changeLanguage') }}?language="+lang;
+        });
+    });
+</script>
 
 <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDduF2tLXicDEPDMAtC6-NLOekX0A5vlnY"></script>
 <!-- inject:js-->

@@ -11,5 +11,16 @@ class Department extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['nom', 'description','type','plase'];
+    protected $fillable = ['nom', 'description','type','plase','user_id'];
+
+    public function profession()
+    {
+        return $this->hasMany(Profession::class);
+    }
+    public function user()
+    {
+        return $this->hasMany(User::class);
+    }
+
+
 }
