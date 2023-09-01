@@ -11,18 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('employers', function (Blueprint $table) {
+        Schema::create('absences', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id'); // Clé étrangère vers la table "users"
-            // Ajoutez ici les autres colonnes spécifiques aux employeurs
+            $table->string('StartDate');
+            $table->string('EndDate');
+            $table->string('AbsenceStatus');
             $table->timestamps();
         });
     }
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('employers');
+        Schema::dropIfExists('absences');
     }
 };

@@ -5,7 +5,8 @@
         <div class=" d-flex flex-wrap justify-content-center breadcrumb-main__wrapper">
             <div class="d-flex align-items-center user-member__title justify-content-center mr-sm-25">
                 <h4 class="text-capitalize fw-500 breadcrumb-title">list department</h4>
-                <span class="sub-title ml-sm-25 pl-sm-25">274 Department</span>
+                <span class="sub-title ml-sm-25 pl-sm-25">{{ $departmentCount }} Department</span>
+
             </div>
 
             <form action="/" class="d-flex align-items-center user-member__form my-sm-0 my-2">
@@ -44,32 +45,22 @@
                                     @csrf
 
                                     <div class="form-group mb-20">
-                                        <input type="text" name="nom" class="form-control" placeholder="nom">
-                                        @error('nom')
-                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                                        @enderror
+                                        <input type="text" name="nom" class="form-control ih-medium ip-gray radius-xs b-light px-15"
+                                               placeholder="nom">
                                     </div>
 
                                     <div class="form-group mb-20">
                                         <textarea class="form-control" name="description"
                                                   id="exampleFormControlTextarea1" rows="3"
                                                   placeholder=" description"></textarea>
-                                        @error('description')
-                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                                        @enderror
                                     </div>
                                     <div class="form-group mb-20">
-                                        <input type="text" name="type" class="form-control" placeholder="Type">
-                                        @error('type')
-                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                                        @enderror
+                                        <input type="text" name="type" class="form-control ih-medium ip-gray radius-xs b-light px-15"
+                                               placeholder="type">
                                     </div>
                                     <div class="form-group mb-20">
-                                        <input type="text" name="plase" class="form-control"
-                                               placeholder="la plase Department">
-                                        @error('plase')
-                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                                        @enderror
+                                        <input type="text" name="plase" class="form-control ih-medium ip-gray radius-xs b-light px-15"
+                                               placeholder="plase">
                                     </div>
                                     <div class="form-group mb-20">
                                         <select class="form-control select " name="user_id">
@@ -176,7 +167,7 @@
                                 </td>
                                 <td>
                                     <div class="userDatatable-content">
-                                        {{ $department->user->name }}
+
                                     </div>
                                 </td>
 

@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
-class Role
-{
+// Modèle Role.php
+use Illuminate\Database\Eloquent\Model;
 
+class Role extends Model
+{
+    protected $fillable = ['role_type'];
 }

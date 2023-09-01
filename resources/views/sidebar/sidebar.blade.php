@@ -37,7 +37,7 @@
                         </li>
                         @if (Session::get('isAdmin') === '1')  @endif
                             <li>
-                                <a href="{{ route('employees.create') }}">Add Employer</a>
+                                <a href="{{ route('user.create') }}">Add Employer</a>
                             </li>
 
                         <li>

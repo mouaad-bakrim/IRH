@@ -12,8 +12,9 @@ class DepartmentController extends Controller
     {
         $users=User::all();
      $departments = Department::all();
+        $departmentCount = Department::count();
         //$departments = Department::with('user')->get();
-        return view('Department.index', compact('departments','users'));
+        return view('Department.index', compact('departments','users','departmentCount'));
     }
 
     public function create()
@@ -21,12 +22,18 @@ class DepartmentController extends Controller
         $users=User::all();
         return view('department.index',compact('users'));
     }
-
     public function store(Request $request)
     {
         Department::create($request->all());
+
+        $userId = $request->input('user_id'); // Replace 'user_id' with the actual field name for the user's primary key
+        $user = User::find($userId);
+
+        if ($user) {
+            $user->update(['role' => 'Manager']);
+        }
+
         return redirect()->route('department.index');
     }
 
-    // Ajoutez les méthodes pour l'édition et la suppression ici
 }

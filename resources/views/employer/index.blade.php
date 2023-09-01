@@ -5,8 +5,7 @@
         <div class=" d-flex flex-wrap justify-content-center breadcrumb-main__wrapper">
             <div class="d-flex align-items-center user-member__title justify-content-center mr-sm-25">
                 <h4 class="text-capitalize fw-500 breadcrumb-title">list employer</h4>
-                <span class="sub-title ml-sm-25 pl-sm-25">274 employer</span>
-            </div>
+                <span class="sub-title ml-sm-25 pl-sm-25">{{ $employerCount }} Employer</span>            </div>
 
             <form action="/" class="d-flex align-items-center user-member__form my-sm-0 my-2">
                 <span data-feather="search"></span>

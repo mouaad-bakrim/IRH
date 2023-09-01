@@ -28,19 +28,43 @@ class User extends Authenticatable
         'status',
         'password',
         'role',
-        'Profession_id',
+        'profession_id',
+        // 'profession_id',
         'SalaireNet',
         'SalaireBrut',
         'PeriodeDeStage',
+        'Adresse',
+        'DateDeNaissance',
+        'Telephone',
+        'EmailProfessionnel',
+        'Nationalite',
+        'Ville',
+        'DateDexpiration',
+        'SituationFamiliale',
+        'NombreDenfants',
+        'NombreDenfantsACharge',
+        'CarteDeSejour',
+        'NumeroDePasseport',
+        'DateDembauche',
+        'dateDeConfirmation',
+        'upload',
     ];
 
-    public function profession()
-    {
-        return $this->belongsTo(Profession::class);
-    } public function department()
+    public function department()
     {
         return $this->belongsTo(Department::class);
     }
+    public function profession()
+    {
+        return $this->belongsTo(Profession::class);
+    }
+
+    // Dans le modèle User.php
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'user_roles'); // Supposons que la table de liaison soit 'user_roles'
+    }
+
     public function isAdmin()
     {
         return $this->role === 'admin';

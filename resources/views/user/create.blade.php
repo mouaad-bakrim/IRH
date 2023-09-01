@@ -77,7 +77,7 @@
                 <h6>Employer </h6>
             </div>
             <div class="card-body py-md-30">
-                <form method="post" action="{{ route('manager.store') }}">
+                <form method="post" action="{{ route('user.store') }}">
                     @csrf
                     <div class="row">
                         <div class="col-md-6 mb-25">

@@ -9,18 +9,16 @@ class CreateContratTypeEmployeesTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
-        Schema::create('role_type_employees', function (Blueprint $table) {
+        Schema::create('contrat_type_employees', function (Blueprint $table) {
             $table->id();
             $table->string('contrat_type')->nullable();
             $table->timestamps();
         });
 
-        DB::table('role_type_employees')->insert([
+        DB::table('contrat_type_employees')->insert([
             ['contrat_type' => 'CDI'],
             ['contrat_type' => 'CDD'],
             ['contrat_type' => 'CDT'],
@@ -29,11 +27,10 @@ class CreateContratTypeEmployeesTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('role_type_employees');
+        Schema::dropIfExists('contrat_type_employees');
     }
-}
+};
+

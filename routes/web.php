@@ -3,8 +3,6 @@
 use App\Http\Controllers\AbsenceController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminDashboardController;
-use App\Http\Controllers\CategorieController;
-use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\EmployeeDashboardController;
@@ -64,12 +62,14 @@ Route::middleware(['auth', 'role:manager'])->group(function () {
 });
 
 Route::post('professions', [ProfessionController::class, 'store'])->name('profession.store');
+// routes/web.php
+
 
 Route::resource('department', DepartmentController::class);
 Route::resource('absence', AbsenceController::class);
 Route::resource('document', DocumentController::class);
 Route::resource('Profession', ProfessionController::class);
-Route::resource('employees', AdminController::class);
+Route::resource('user', AdminController::class);
 Route::resource('employer', AdminController::class);
 Route::resource('employer', EmployerController::class);
 /*
@@ -89,6 +89,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('da
 Route::group(['middleware' => 'superadmin'], function () {
 });
 
+//Route::get('/create', 'AdminController@create')->name('manager.create');
 
 
 Route::get('view', [LanguageController::class, 'view'])->name('view');
@@ -96,5 +97,3 @@ Route::get('language-change', [LanguageController::class, 'changeLanguage'])->na
 
 
 
-Route::resource('commandes', CommandeController::class);
-Route::resource('categories', CategorieController::class);

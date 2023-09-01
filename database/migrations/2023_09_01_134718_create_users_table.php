@@ -20,8 +20,10 @@ return new class extends Migration
             $table->boolean('isAdmin')->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-           $table->unsignedBigInteger('profession_id');
+            $table->unsignedBigInteger('profession_id');
             $table->foreign('profession_id')->references('id')->on('professions');
+          //  $table->unsignedBigInteger('profession_id');
+           // $table->foreign('profession_id')->references('id')->on('professions');
             $table->string('role')->nullable();
             $table->string('status')->nullable();
             $table->string('contrat')->nullable();

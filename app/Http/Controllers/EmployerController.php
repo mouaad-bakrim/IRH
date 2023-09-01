@@ -16,8 +16,9 @@ class employerController extends Controller
      */
     public function index()
     {
+        $employerCount = Employer::count();
         $user = user::orderBy('id','desc')->paginate(5);
-        return view('employer.index', compact('user'));
+        return view('employer.index', compact('user','employerCount'));
     }
     /**
      * Display a listing of the resource.
@@ -52,7 +53,7 @@ class employerController extends Controller
             'name' => 'required|string',
             'prenom' => 'required|string',
             'role' => 'required|string',
-            // 'contrat' => 'required|string',
+            'contrat' => 'required|string',
             'cin' => 'required|string',
             'email' => 'required|email|unique:users,email',
         ]);
@@ -97,7 +98,7 @@ class employerController extends Controller
             'name' => 'required|string',
             'prenom' => 'required|string',
             'role' => 'required|string',
-            // 'contrat' => 'required|string',
+            'contrat' => 'required|string',
             'cin' => 'required|string',
             'email' => 'required|email|unique:users,email',
         ]);
