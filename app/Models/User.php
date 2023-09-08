@@ -29,7 +29,6 @@ class User extends Authenticatable
         'password',
         'role',
         'profession_id',
-        // 'profession_id',
         'SalaireNet',
         'SalaireBrut',
         'PeriodeDeStage',
@@ -57,6 +56,9 @@ class User extends Authenticatable
     public function profession()
     {
         return $this->belongsTo(Profession::class);
+    } public function CompanyDetail()
+    {
+        return $this->belongsTo(CompanyDetails::class);
     }
 
     // Dans le modèle User.php
@@ -65,12 +67,32 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class, 'user_roles'); // Supposons que la table de liaison soit 'user_roles'
     }
 
+    public function auditLog()
+    {
+        return $this->hasMany(AuditLog::class);
+    } public function leaves()
+    {
+        return $this->hasMany(Leaves::class);
+    }
+    public function employeeTrainigs()
+    {
+        return $this->hasMany(EmployeeTrainigs::class);
+    }public function document()
+    {
+        return $this->hasMany(Document::class);
+    }public function employeeCertification()
+    {
+        return $this->hasMany(EmployeeCertification::class);
+    }
+
     public function isAdmin()
     {
         return $this->role === 'admin';
 
         // Supposons que 'role' soit le champ qui définit le rôle de l'utilisateur.
     }
+
+
 
     /**
      * The attributes that should be hidden for serialization.

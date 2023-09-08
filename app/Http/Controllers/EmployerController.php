@@ -7,28 +7,56 @@ use Illuminate\Http\Request;
 use App\Models\employer;
 use Illuminate\Support\Facades\DB;
 
-class employerController extends Controller
+class EmployerController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
      */
     public function index()
     {
-        $employerCount = Employer::count();
-        $user = user::orderBy('id','desc')->paginate(5);
-        return view('employer.index', compact('user','employerCount'));
+        //$employeeCount = Employee::count();
+        $user = user::all();
+
+        return view('employer.index', compact('user',));
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function ind()
+
+  /*  public function activate($id)
     {
-        return view('employer.confirmer1');
+        $user = User::find($id);
+
+        if ($user) {
+            $user->status = 1; // Activer le compte
+            $user->save();
+        }
+
+        return redirect()->route('employer.index');
     }
+
+    public function deactivate($id)
+    {
+        $user = User::find($id);
+
+        if ($user) {
+            $user->status = 0; // Désactiver le compte
+            $user->save();
+        }
+
+        return redirect()->route('employer.index');
+    }
+*/
+
+
+
+    public function updateStatus(Request $request)
+    {
+        $user = user::find($request->user_id);
+        $user->status = $request->status;
+        $user->save();
+        return response()->json(['success'=>'Status change successfully.']);
+    }
+
 
     /**
      * Show the form for creating a new resource.

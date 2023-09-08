@@ -27,13 +27,13 @@ app.component('example-component', ExampleComponent);
  */
 
 // Object.entries(import.meta.glob('./**/*.vue', { eager: true })).forEach(([path, definition]) => {
-//     app.component(path.split('/').pop().replace(/\.\w+$/, ''), definition.default);
+//     ap.blade.php.component(path.split('/').pop().replace(/\.\w+$/, ''), definition.default);
 // });
 
 /**
  * Finally, we will attach the application instance to a HTML element with
- * an "id" attribute of "app". This element is included with the "auth"
+ * an "id" attribute of "ap.blade.php". This element is included with the "auth"
  * scaffolding. Otherwise, you will need to add an element yourself.
  */
 
-app.mount('#app');
+app.mount('#ap.blade.php');

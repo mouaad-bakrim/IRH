@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nom');
             $table->string('description');
-            $table->string('salare');
+            $table->string('salaire')->nullable();
             $table->unsignedBigInteger('department_id');
             $table->foreign('department_id')->references('id')->on('departments');
             $table->string('Requirements');

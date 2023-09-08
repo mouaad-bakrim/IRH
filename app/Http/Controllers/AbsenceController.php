@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AbsenceType;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Absence;
 
@@ -14,8 +16,10 @@ class AbsenceController extends Controller
      */
     public function index()
     {
-        $absence = Absence::orderBy('id','desc')->paginate(5);
-        return view('absence.index', compact('absence'));
+        $users=User::all();
+        $absenceTypes = AbsenceType::all();
+        $absence = Absence::all();
+        return view('absence.index', compact('absence','absenceTypes','users'));
     }
 
     /**
@@ -25,7 +29,10 @@ class AbsenceController extends Controller
      */
     public function create()
     {
-        return view('absence.index');
+        $users=User::all();
+        $absenceTypes = AbsenceType::all(); // Assurez-vous d'utiliser le nom correct du modèle "AbsenceType"
+
+        return view('absence.index',compact('users','absenceTypes'));
     }
 
     /**
@@ -40,63 +47,34 @@ class AbsenceController extends Controller
             'StartDate' => 'required',
             'EndDate' => 'required',
             'AbsenceStatus' => 'required',
+            'absenceTypes_id' => 'required',
+
         ]);
 
-        Absence::create($request->post());
+        $startDate = date('Y-m-d', strtotime($request->input('StartDate')));
+        $endDate = date('Y-m-d', strtotime($request->input('EndDate')));
+
+        $absenceType = AbsenceType::find($request->input('absenceTypes_id'));
+
+        if (!$absenceType) {
+            // Le type d'absence n'existe pas, renvoyez une erreur ou effectuez une action appropriée
+            return redirect()->back()->with('error', 'Type d\'absence invalide.');
+        }
+
+        $data = [
+            'StartDate' => $startDate,
+            'EndDate' => $endDate,
+            'user_id' => $request->input('user_id'),
+            'absenceTypes_id' => $request->input('absenceTypes_id'),
+            'AbsenceStatus' => $request->input('AbsenceStatus'),
+            ];
+        Absence::create($data);
 
         return redirect()->route('absence.index')->with('success','absence has been created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Absence  $Absence
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Absence $Absence)
-    {
-        return view('absence.show',compact('Absence'));
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Absence  $Absence
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Absence $Absence)
-    {
-        return view('absence.edit',compact('Absence'));
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Absence  $Absence
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Absence $Absence)
-    {
-        $request->validate([
-            'nom' => 'required',
-            'description' => 'required',
-        ]);
 
-        $Absence->fill($request->post())->save();
 
-        return redirect()->route('absence.index')->with('success','absence Has Been updated successfully');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Absence  $Absence
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Absence $Absence)
-    {
-        $Absence->delete();
-        return redirect()->route('absence.index')->with('success', 'absence has been deleted successfully');
-    }
 }

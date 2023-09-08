@@ -15,7 +15,11 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('absence_id');
             $table->foreign('absence_id')->references('id')->on('absences');
-            $table->string('nom');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->string('FileURL');
+            $table->unsignedBigInteger('documentTypes_id');
+            $table->foreign('documentTypes_id')->references('id')->on('documentTypes');
             $table->timestamps();
         });
     }

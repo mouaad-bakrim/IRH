@@ -12,7 +12,7 @@ class profession extends Model
     protected $fillable = [
         'nom',
         'description',
-        'salare',
+        'salaire',
         'Requirements',
         'department_id',
     ];
@@ -20,7 +20,7 @@ class profession extends Model
     {
         return $this->belongsTo(Department::class);
     }
-    public function user()
+    public function users()
     {
         return $this->hasMany(User::class);
     }

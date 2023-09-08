@@ -96,10 +96,7 @@
                             <input type="text" name="cin" class="form-control ih-medium ip-gray radius-xs b-light px-15"
                                    placeholder="cin">
                         </div>
-                        <div class="col-md-6 mb-25">
-                            <input type="text" name="status" class="form-control ih-medium ip-gray radius-xs b-light px-15"
-                                   placeholder="status">
-                        </div>
+
 
 
                         <div class="form-group col-md-6 mb-25">

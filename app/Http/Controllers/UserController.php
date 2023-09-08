@@ -12,7 +12,7 @@ class UserController extends Controller
 {
     public function changePassword(Request $request)
     {
-        return view('dashboard.change-password');
+        return view('user.change-password');
     }
 
     public function changePasswordSave(Request $request)
@@ -25,20 +25,23 @@ class UserController extends Controller
         $auth = Auth::user();
 
         // The passwords matches
-        if (!Hash::check($request->get('current_password'), $auth->password))
-        {
+        if (!Hash::check($request->get('current_password'), $auth->password)) {
             return back()->with('error', "Current Password is Invalid");
         }
 
 // Current password and new password same
-        if (strcmp($request->get('current_password'), $request->new_password) == 0)
-        {
+        if (strcmp($request->get('current_password'), $request->new_password) == 0) {
             return redirect()->back()->with("error", "New Password cannot be same as your current password.");
         }
 
-        $user =  User::find($auth->id);
-        $user->password =  Hash::make($request->new_password);
-        $user->save();
-        return back()->with('success', "Password Changed Successfully");
+        $user = User::find($auth->id);
+        $user->password = Hash::make($request->new_password);
+        if ($user->save()) {
+            // Appel de la méthode pour mettre à jour le statut
+            $user->updateStatusAfterPasswordChange(true);
+            return back()->with('success', "Mot de passe modifié avec succès");
+        } else {
+            return back()->with('error', "Erreur lors de la modification du mot de passe");
+        }
+        }
     }
-}

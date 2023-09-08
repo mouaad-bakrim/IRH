@@ -59,8 +59,8 @@
                                         @enderror
                                     </div>
                                     <div class="form-group mb-20">
-                                        <input type="text" name="salare" class="form-control" placeholder="salare">
-                                        @error('salare')
+                                        <input type="text" name="salaire" class="form-control" placeholder="salaire">
+                                        @error('salaire')
                                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -130,7 +130,7 @@
                                 <span class="userDatatable-title">Description</span>
                             </th>
                             <th>
-                                <span class="userDatatable-title">salare</span>
+                                <span class="userDatatable-title">salaire</span>
                             </th>
                             <th>
                                 <span class="userDatatable-title">Requirements</span>
@@ -167,7 +167,7 @@
                                 </td>
                                 <td>
                                     <div class="userDatatable-content">
-                                        {{ $profession->salare }}
+                                        {{ $profession->salaire }}
                                     </div>
                                 </td>
                                 <td>
@@ -177,7 +177,7 @@
                                 </td>
                                 <td>
                                     <div class="userDatatable-content">
-                                        {{ $profession->department->nom }}
+                                        {{ $profession->department->name }}
                                     </div>
                                 </td>
 

@@ -11,13 +11,43 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('employers', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id'); // Clé étrangère vers la table "users"
-            // Ajoutez ici les autres colonnes spécifiques aux employeurs
+            $table->string('name')->nullable();
+            $table->string('prenom')->nullable();
+            $table->string('cin')->nullable();
+            $table->string('email')->unique();
+            $table->boolean('isAdmin')->default(false);
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->string('role')->nullable();
+            $table->string('status')->nullable();
+            $table->string('contrat')->nullable();
+            $table->string('SalaireNet')->nullable();
+            $table->string('SalaireBrut')->nullable();
+            $table->string('PeriodeDeStage')->nullable();
+            $table->string('Adresse')->nullable();
+            $table->string('DateDeNaissance')->nullable();
+            $table->string('Telephone')->nullable();
+            $table->string('EmailProfessionnel')->nullable();
+            $table->string('Nationalite')->nullable();
+            $table->string('Ville')->nullable();
+            $table->string('SituationFamiliale')->nullable();
+            $table->string('NombreDenfants')->nullable();
+            $table->string('NombreDenfantsACharge')->nullable();
+            $table->string('CarteDeSejour')->nullable();
+            $table->string('NumeroDePasseport')->nullable();
+            $table->string('DateDexpiration')->nullable();
+            $table->string('DateDembauche')->nullable();
+            $table->string('dateDeConfirmation')->nullable();
+            $table->unsignedBigInteger('profession_id')->nullable();
+            $table->foreign('profession_id')->references('id')->on('professions');
+            $table->string('upload')->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
     }
+
     /**
      * Reverse the migrations.
      */

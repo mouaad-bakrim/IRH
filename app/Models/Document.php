@@ -13,7 +13,22 @@ class Document extends Model
 
     use HasFactory;
     protected $fillable = [
-        'nom',
+        'FileURL',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+    public function leaves()
+    {
+        return $this->hasOne(Leaves::class);
+    }
+    public function documentTypes()
+    {
+        return $this->belongsTo(DocumentTypes::class, 'documentType_id');
+    }
+
+
 }
 

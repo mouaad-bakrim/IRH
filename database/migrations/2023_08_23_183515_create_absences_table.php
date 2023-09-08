@@ -12,11 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('absences', function (Blueprint $table) {
-            $table->id();
-            $table->string('StartDate');
-            $table->string('EndDate');
+            $table->id('Absence_id');
+            $table->date('StartDate');
+            $table->date('EndDate');
             $table->string('AbsenceStatus');
+            $table->unsignedBigInteger('absenceTypes_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
+            $table->foreign('absenceTypes_id')->references('id')->on('absenceTypes');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

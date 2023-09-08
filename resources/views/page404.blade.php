@@ -50,16 +50,16 @@ svg {
   animation: float 1s infinite ease-in-out alternate;
 }
 #Polygon-2 {
-  animation-delay: .2s; 
+  animation-delay: .2s;
 }
 #Polygon-3 {
-  animation-delay: .4s; 
+  animation-delay: .4s;
 }
 #Polygon-4 {
-  animation-delay: .6s; 
+  animation-delay: .6s;
 }
 #Polygon-5 {
-  animation-delay: .8s; 
+  animation-delay: .8s;
 }
 
 @keyframes float {
@@ -104,3 +104,12 @@ svg {
     </div>
   </div>
 </div>
+
+
+
+
+
+
+
+
+

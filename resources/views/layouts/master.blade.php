@@ -12,8 +12,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js')}}"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- inject:css-->
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <!-- inject:css-->
     <link rel="stylesheet" href="{{ asset('assets/vendor_assets/css/bootstrap/bootstrap.css') }}">
 
     <link rel="stylesheet" href="{{ asset('assets/vendor_assets/css/daterangepicker.css') }}">
@@ -1026,12 +1031,18 @@
                             <img src="{{ asset('img/flag.png')}}" alt="" class="rounded-circle">
                         </a>
                         <div class="dropdown-wrapper dropdown-wrapper--small" name="language">
-                            <a href=""><img value="en" src="{{ asset('img/eng.png')}}" {{ \Session::get('language') == 'en' ? 'selected' : '' }} alt=""> English</a>
-                            <a href=""><img value="fr" src="{{ asset('img/ger.png')}}" {{ \Session::get('language') == 'fr' ? 'selected' : '' }} alt=""> France</a>
-                            <a href=""><img value="ar" src="{{ asset('img/spa.png')}}" {{ \Session::get('language') == 'ar' ? 'selected' : '' }} alt=""> arabe</a>
+                            <a href=""><img value="en" src="{{ asset('img/eng.png')}}" {{ session()->get('locale') == 'en' ? 'selected' : '' }} alt=""> English</a>
+                            <a href=""><img value="fr" src="{{ asset('img/ger.png')}}" {{ session()->get('locale') == 'fr' ? 'selected' : '' }} alt=""> France</a>
+                            <a href=""><img value="ar" src="{{ asset('img/spa.png')}}" {{ session()->get('locale') == 'ar' ? 'selected' : '' }} alt=""> arabe</a>
                         </div>
+
+
                     </div>
-                </li>
+                </li> <select class="form-control Langchange">
+                    <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
+                    <option value="fr" {{ session()->get('locale') == 'fr' ? 'selected' : '' }}>franc</option>
+                    <option value="ar" {{ session()->get('locale') == 'ar' ? 'selected' : '' }}>arab</option>
+                </select>
                 <!-- ends: .nav-flag-select -->
                 <li class="nav-author">
                     <div class="dropdown-custom">
@@ -1039,8 +1050,8 @@
                         <div class="dropdown-wrapper">
                             <div class="nav-author__info">
                                 <div class="author-img">
-                                    <img src="{{ asset('img/author-nav.jpg')}}" alt="" class="rounded-circle">
                                 </div>
+
                                 <div>
                                     @if (Auth::check())
                                         <h6> {{ Auth::user()->name }}</h6>
@@ -1156,16 +1167,12 @@
 </div>
 <div class="overlay-dark-sidebar"></div>
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('select[name=language]').change(function() {
-            var lang = $(this).val();
-            window.location.href = "{{ route('changeLanguage') }}?language="+lang;
-        });
-    });
-</script>
+
 
 <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDduF2tLXicDEPDMAtC6-NLOekX0A5vlnY"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <!-- inject:js-->
 <script src="{{asset('assets/vendor_assets/js/jquery/jquery-3.5.1.min.js')}}"></script>
 <script src="{{asset('assets/vendor_assets/js/jquery/jquery-ui.js')}}"></script>
@@ -1216,3 +1223,34 @@
 </body>
 
 </html>
+
+<script>
+    $(function() {
+        $('.toggle-class').change(function() {
+            var status = $(this).prop('checked') === true ? 1 : 0;
+            var user_id = $(this).data('id');
+            $.ajax({
+
+                type: "GET",
+                dataType: "json",
+                url: '/status/update',
+                data: {'status': status, 'user_id': user_id},
+                success: function(data){
+                    console.log(data.success)
+                }
+            });
+        })
+    });
+</script>
+
+
+<script type="text/javascript">
+    var url = "{{ route('admin/dashboard') }}";
+    $(".Langchange").change(function(){
+        window.location.href = url + "?lang="+ $(this).val();
+    });
+</script>
+
+<script>
+    new DataTable('#example');
+</script>

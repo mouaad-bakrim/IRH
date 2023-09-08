@@ -28,10 +28,7 @@ class HomeController extends Controller
         if ($user->isAdmin == 1) {
             return view('dashboard.home');
         } elseif ($user->isAdmin == 0) {
-            return view('dashboard.employer');
-
-        } elseif ($user->isAdmin == 0) {
-            return view('dashboard.manager');
+            return view('profile.edit');
         } else {
             return view('dashboard.tout');
         }

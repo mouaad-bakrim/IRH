@@ -14,6 +14,18 @@ class Absence extends Model
         'StartDate',
         'EndDate',
         'AbsenceStatus',
+        'absenceType-id',
+        'user_id'
 
     ];
+    protected $primaryKey = 'Absence_id';
+
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id','id');
+    } public function absenceTypes()
+    {
+        return $this->belongsTo(AbsenceType::class, 'absenceTypes_id','id');
+    }
 }

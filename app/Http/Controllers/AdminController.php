@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employees;
 use App\Models\Employer;
 use App\Models\profession;
 use App\Models\User;
@@ -28,7 +29,6 @@ class AdminController extends Controller
             'prenom' => 'required|string',
             'contrat' => 'required|string',
             'cin' => 'required|string',
-            'status' => 'required|string',
             'SalaireNet' => 'required|string',
             'SalaireBrut' => 'required|string',
             'PeriodeDeStage' => 'required|string',
@@ -40,12 +40,10 @@ class AdminController extends Controller
         $data['password'] = Hash::make($data['name'] . '_2023');
 
         $user = User::create($data);
-        // Employer::create($data);
-
-
+         Employees::create($data);
         $user->update(['role' => 'Employer']);
-
 
         return redirect()->route('employer.index')->with('success', 'Employé/gestionnaire créé avec succès.');
     }
+
 }

@@ -2,7 +2,7 @@
 @extends('layouts.master')
 @section('content')
     <div class="breadcrumb-main">
-        <h4 class="text-capitalize breadcrumb-title">admin Dashboard</h4>
+        <h4 class="text-capitalize breadcrumb-title">{{__('Admin Dashboard')}}</h4>
         <div class="breadcrumb-action justify-content-center flex-wrap">
             <div class="action-btn">
 

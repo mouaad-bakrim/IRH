@@ -1,11 +1,14 @@
 @extends('layouts.master')
 @section('content')
 
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
     <div class="breadcrumb-main user-member justify-content-sm-between ">
         <div class=" d-flex flex-wrap justify-content-center breadcrumb-main__wrapper">
             <div class="d-flex align-items-center user-member__title justify-content-center mr-sm-25">
                 <h4 class="text-capitalize fw-500 breadcrumb-title">list employer</h4>
-                <span class="sub-title ml-sm-25 pl-sm-25">{{ $employerCount }} Employer</span>            </div>
+                <span class="sub-title ml-sm-25 pl-sm-25"> Employer</span>            </div>
 
             <form action="/" class="d-flex align-items-center user-member__form my-sm-0 my-2">
                 <span data-feather="search"></span>
@@ -50,13 +53,6 @@
                                                placeholder="cin">
                                     </div>
 
-                                    <!--<div class="form-group col-md-6 mb-25">
-                                        <select class="form-control px-15" id="exampleFormControlSelect1">
-                                            <option>Employer</option>
-                                            <option>Manager</option>
-                                        </select>
-                                    </div>-->
-
                                     <div class="form-group col-md-6 mb-25">
                                     </div>
                                     <div class="col-md-6">
@@ -86,7 +82,7 @@
         <div class="col-lg-12">
             <div class="userDatatable global-shadow border p-30 bg-white radius-xl w-100 mb-30">
                 <div class="table-responsive">
-                    <table class="table mb-0 table-borderless">
+                    <table id="example" class="display" style="width:100%">
                         <thead>
                         <tr class="userDatatable-header">
 
@@ -104,6 +100,8 @@
                             </th>
                             <th>
                                 <span class="userDatatable-title">Role</span>
+                            </th><th>
+                                <span class="userDatatable-title">Status</span>
                             </th>
                             <th>
                                 <span class="userDatatable-title ">action</span>
@@ -124,7 +122,7 @@
                                 </td>
                                 <td>
                                     <div class="userDatatable-content">
-                                        {{ $list->name }}  {{ $list->prenom }}
+                                        {{ $list->name }}
                                     </div>
                                 </td>
                                 <td>
@@ -156,6 +154,12 @@
                                 </td>
                                 <td>
                                     <div class="userDatatable-content">
+                                    <input data-id="{{$list->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="InActive" {{ $list->status ? 'checked' : '' }}>
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="userDatatable-content">
                                         <ul class="orderDatatable_actions mb-0 d-flex flex-wrap">
                                             <form action="{{ route('employer.destroy',$list->id) }}" method="Post" style="display: inline-flex;">
                                                 <li>
@@ -182,36 +186,6 @@
 
                         </tbody>
                     </table>
-                    {!! $user->links() !!}
-                </div>
-                <div class="d-flex justify-content-end pt-30">
-
-                    <nav class="atbd-page ">
-                        <ul class="atbd-pagination d-flex">
-                            <li class="atbd-pagination__item">
-                                <a href="#" class="atbd-pagination__link pagination-control"><span
-                                        class="la la-angle-left"></span></a>
-                                <a href="#" class="atbd-pagination__link"><span class="page-number">1</span></a>
-                                <a href="#" class="atbd-pagination__link active"><span class="page-number">2</span></a>
-                                <a href="#" class="atbd-pagination__link"><span class="page-number">3</span></a>
-                                <a href="#" class="atbd-pagination__link pagination-control"><span class="page-number">...</span></a>
-                                <a href="#" class="atbd-pagination__link"><span class="page-number">12</span></a>
-                                <a href="#" class="atbd-pagination__link pagination-control"><span
-                                        class="la la-angle-right"></span></a>
-                                <a href="#" class="atbd-pagination__option">
-                                </a>
-                            </li>
-                            <li class="atbd-pagination__item">
-                                <div class="paging-option">
-                                    <select name="page-number" class="page-selection">
-                                        <option value="20">20/page</option>
-                                        <option value="40">40/page</option>
-                                        <option value="60">60/page</option>
-                                    </select>
-                                </div>
-                            </li>
-                        </ul>
-                    </nav>
                 </div>
             </div>
         </div>
@@ -219,7 +193,3 @@
 
 
 @endsection
-
-
-
-

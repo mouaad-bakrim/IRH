@@ -41,6 +41,23 @@
                                 @endif
                                 <form action="{{ route('absence.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
+                                    <div class="form-group mb-20">
+                                        <select class="form-control select " name="user_id">
+                                            <option selected disabled>Select Employer:</option>
+                                            @foreach($users as $user)
+                                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group mb-20">
+                                        <select class="form-control select " name="user_id">
+                                            <option selected disabled>Select AbsenceTypes:</option>
+                                            @foreach($absenceTypes as $absenceType)
+                                                <option value="{{ $absenceType->id }}">{{ $absenceType->AbsenceReason }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
 
                                     <div class="form-group mb-20">
                                         <input type="text" name="StartDate" class="form-control" placeholder="StartDate">
@@ -103,9 +120,14 @@
                                 <span class="userDatatable-title">ID</span>
                             </th>
                             <th>
-                                <span class="userDatatable-title">StartDate</span>
+                                <span class="userDatatable-title">emloyer</span>
+                            </th>  <th>
+                                <span class="userDatatable-title">AbsenceTypes</span>
                             </th>
                             <th>
+                                <span class="userDatatable-title">StartDate</span>
+                            </th>
+                           <th>
                                 <span class="userDatatable-title">EndDate</span>
                             </th>
                             <th>
@@ -125,7 +147,15 @@
 
                                 <td>
                                     <div class="userDatatable-content">
-                                        {{ $company->id }}
+                                        {{ $company->Absence_id }}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="userDatatable-content">
+                                        {{ $company->user->name }}
+                                    </div>
+                                </td><td>
+                                    <div class="userDatatable-content">
                                     </div>
                                 </td>
                                 <td>
@@ -150,13 +180,14 @@
                                 <td>
                                     <div class="userDatatable-content">
                                         <ul class="orderDatatable_actions mb-0 d-flex flex-wrap">
-                                            <form action="{{ route('absence.destroy',$company->id) }}" method="Post" style="display: inline-flex;">
+                                            <form action=""
+                                                  method="Post" style="display: inline-flex;">
                                                 <li>
                                                     <a href="#" class="view">
                                                         <span data-feather="eye"></span></a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{ route('absence.edit',$company->id) }}" class="edit">
+                                                    <a href="" class="edit">
                                                         <span data-feather="edit"></span></a>
                                                 </li>
                                                 <li>
@@ -175,7 +206,7 @@
 
                         </tbody>
                     </table>
-                    {!! $absence->links() !!}
+
                 </div>
                 <div class="d-flex justify-content-end pt-30">
 

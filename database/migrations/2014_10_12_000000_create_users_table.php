@@ -12,16 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
+            $table->id('user_id');
+            $table->string('name')->nullable();
             $table->string('prenom')->nullable();
             $table->string('cin')->nullable();
             $table->string('email')->unique();
             $table->boolean('isAdmin')->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-           $table->unsignedBigInteger('profession_id');
-            $table->foreign('profession_id')->references('id')->on('professions');
             $table->string('role')->nullable();
             $table->string('status')->nullable();
             $table->string('contrat')->nullable();
@@ -42,6 +40,10 @@ return new class extends Migration
             $table->string('DateDexpiration')->nullable();
             $table->string('DateDembauche')->nullable();
             $table->string('dateDeConfirmation')->nullable();
+            $table->unsignedBigInteger('profession_id')->nullable();
+            $table->foreign('profession_id')->references('id')->on('professions'); $table->unsignedBigInteger('profession_id')->nullable();
+            $table->unsignedBigInteger('CompanyDetails_id')->nullable();
+            $table->foreign('CompanyDetails_id')->references('id')->on('CompanyDetails');
             $table->string('upload')->nullable();
             $table->rememberToken();
             $table->timestamps();

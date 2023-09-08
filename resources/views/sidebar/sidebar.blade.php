@@ -95,6 +95,34 @@
                     <ul>
                         <li>
                             <a href="users-membar.html" class="">Table de bord</a>
+                        </li> <li>
+                            <a href="{{route('manager.index')}}" class="">list des manager</a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="has-child">
+                    <a href="#" class="">
+                        <span data-feather="user-check" class="nav-icon"></span>
+                        <span class="menu-text">EmployeeCertification</span>
+                        <span class="toggle-icon"></span>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{route('EmployeeCertification.index')}}">EmployeeCertification </a>
+                        </li>
+
+                    </ul>
+                </li>   <li class="has-child">
+                    <a href="#" class="">
+                        <span data-feather="user-check" class="nav-icon"></span>
+                        <span class="menu-text">EmployeeTrainings</span>
+                        <span class="toggle-icon"></span>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{route('EmployeeTrainings.index')}}">EmployeeTrainings
+                            </a>
                         </li>
 
                     </ul>
@@ -123,6 +151,8 @@
                             <a href="{{route('document.index')}}" class="">Table de bord</a>
                         </li>
                         <li>
+                            <a href="{{route('AbsenceType.index')}}" class="">absenceTypes</a>
+                        </li> <li>
                             <a href="{{route('absence.index')}}" class="">List des Absence</a>
                         </li>
 

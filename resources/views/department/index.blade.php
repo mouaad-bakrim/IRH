@@ -164,10 +164,9 @@
                                     <div class="userDatatable-content">
                                         {{ $department->plase }}
                                     </div>
-                                </td>
-                                <td>
+                                </td> <td>
                                     <div class="userDatatable-content">
-
+                                        {{ $department->user->name }}
                                     </div>
                                 </td>
 
