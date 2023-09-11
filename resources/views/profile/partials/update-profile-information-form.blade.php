@@ -81,6 +81,22 @@
                                    autofocus autocomplete="SituationFamiliale" placeholder="SituationFamiliale"/>
                     <x-input-error class="mt-2" :messages="$errors->get('SituationFamiliale')"/>
                 </div>
+                <div class="col-md-4 mb-10">
+                    <div class="form-group students-up-files">
+
+                        <label>Upload user Photo (150px X 150px)</label>
+                        <div class="uplod">
+                            <label class="file-upload image-upbtn mb-0 @error('upload') is-invalid @enderror">
+                                Choose File <input type="file" name="upload">
+                            </label>
+                            @error('upload')
+                            <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
 
                 <button class="btn btn-primary btn-default btn-squared text-capitalize radius-md shadow2" data-toggle="modal" data-target="#successModal">
                     {{ __('Save') }}

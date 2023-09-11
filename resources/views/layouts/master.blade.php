@@ -1045,11 +1045,18 @@
                 </select>
                 <!-- ends: .nav-flag-select -->
                 <li class="nav-author">
+
                     <div class="dropdown-custom">
                         <a href="javascript:;" class="nav-item-toggle"><img src="{{ asset('img/author-nav.jpg')}}" alt="" class="rounded-circle"></a>
                         <div class="dropdown-wrapper">
                             <div class="nav-author__info">
                                 <div class="author-img">
+                                    @if (Auth::check() && Auth::user()->upload)
+                                        <img src="{{ asset(Auth::user()->upload) }}" alt="{{ Auth::user()->name }}'s Profile Image">
+                                    @else
+                                        <!-- Afficher une image par défaut ou un espace réservé si l'utilisateur n'a pas téléchargé d'image de profil -->
+                                        <img src="{{ asset('default-profile-image.jpg') }}" alt="Default Profile Image">
+                                    @endif
                                 </div>
 
                                 <div>

@@ -69,6 +69,39 @@
                         </li>
 
                     </ul>
+                </li>   <li class="has-child">
+                    <a href="#" class="">
+                        <span data-feather="shopping-cart" class="nav-icon"></span>
+                        <span class="menu-text">AuditLog</span>
+                        <span class="toggle-icon"></span>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{route('AuditLog.index')}}" class="">AuditLog</a>
+                        </li>
+                    </ul>
+                </li>  <li class="has-child">
+                    <a href="#" class="">
+                        <span data-feather="shopping-cart" class="nav-icon"></span>
+                        <span class="menu-text">SalaryAdvance</span>
+                        <span class="toggle-icon"></span>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{route('SalaryAdvanceRequests.index')}}" class="">SalaryAdvance</a>
+                        </li>
+                    </ul>
+                </li> <li class="has-child">
+                    <a href="#" class="">
+                        <span data-feather="shopping-cart" class="nav-icon"></span>
+                        <span class="menu-text">Document</span>
+                        <span class="toggle-icon"></span>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{route('document.index')}}" class="">document</a>
+                        </li>
+                    </ul>
                 </li>    <li class="has-child">
                     <a href="#" class="">
                         <span data-feather="shopping-cart" class="nav-icon"></span>

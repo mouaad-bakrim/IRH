@@ -4,8 +4,8 @@
     <div class="breadcrumb-main user-member justify-content-sm-between ">
         <div class=" d-flex flex-wrap justify-content-center breadcrumb-main__wrapper">
             <div class="d-flex align-items-center user-member__title justify-content-center mr-sm-25">
-                <h4 class="text-capitalize fw-500 breadcrumb-title">list document</h4>
-                <span class="sub-title ml-sm-25 pl-sm-25">274 document</span>
+                <h4 class="text-capitalize fw-500 breadcrumb-title">list EmCertification</h4>
+                <span class="sub-title ml-sm-25 pl-sm-25">274Certification</span>
             </div>
 
             <form action="/" class="d-flex align-items-center user-member__form my-sm-0 my-2">
@@ -15,11 +15,11 @@
             </form>
 
         </div>
-        <!------------------ajoute document --------------->
+        <!------------------ajoute AuditLog --------------->
 
         <div class="action-btn">
             <a href="#" class="btn px-15 btn-primary" data-toggle="modal" data-target="#new-member">
-                <i class="las la-plus fs-16"></i>Add New document</a>
+                <i class="las la-plus fs-16"></i>Add New EmCertification</a>
 
             <!-- Modal -->
             <div class="modal fade new-member" id="new-member" role="dialog" tabindex="-1"
@@ -39,8 +39,10 @@
                                         {{ session('status') }}
                                     </div>
                                 @endif
-                                <form action="{{ route('document.store') }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('AuditLog.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
+
+
                                     <div class="form-group mb-20">
                                         <select class="form-control select " name="user_id">
                                             <option selected disabled>Select Employer:</option>
@@ -49,21 +51,36 @@
                                             @endforeach
                                         </select>
                                     </div>
-
                                     <div class="form-group mb-20">
-                                        <input type="text" name="FileURL" class="form-control" placeholder="FileURL">
-                                        @error('FileURL')
+                                        <input type="text" name="ActionType" class="form-control" placeholder="ActionType">
+                                        @error('ActionType')
                                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                                         @enderror
                                     </div>
-
+                                    <div class="form-group mb-20">
+                                        <input type="text" name="EntityAffected" class="form-control" placeholder="EntityAffected">
+                                        @error('EntityAffected')
+                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group mb-20">
+                                        <input type="text" name="ActionDescription" class="form-control" placeholder="ActionDescription">
+                                        @error('ActionDescription')
+                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                        @enderror
+                                    </div><div class="form-group mb-20">
+                                        <input type="text" name="Date" class="form-control" placeholder="Date">
+                                        @error('Date')
+                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                        @enderror
+                                    </div>
 
 
                                     <div class="button-group d-flex pt-25">
 
 
                                         <button type="submit" class="btn btn-primary btn-default btn-squared text-capitalize">add new
-                                            document
+                                            AuditLog
                                         </button>
 
 
@@ -87,7 +104,7 @@
 
 
     </div>
-    <!-------------------        Liste document         -------->
+    <!-------------------        Liste AuditLog         -------->
     <div class="row">
         <div class="col-lg-12">
             <div class="userDatatable global-shadow border p-30 bg-white radius-xl w-100 mb-30">
@@ -99,11 +116,20 @@
                             <th>
                                 <span class="userDatatable-title">ID</span>
                             </th>
+
                             <th>
-                                <span class="userDatatable-title">employer</span>
+                                <span class="userDatatable-title">emloyer</span>
                             </th>
                             <th>
-                                <span class="userDatatable-title">FileURL</span>
+                                <span class="userDatatable-title">ActionType</span>
+                            </th>
+                           <th>
+                                <span class="userDatatable-title">EntityAffected</span>
+                            </th>
+                            <th>
+                                <span class="userDatatable-title">ActionDescription</span>
+                            </th>  <th>
+                                <span class="userDatatable-title">Date</span>
                             </th>
                             <th>
                                 <span class="userDatatable-title ">action</span>
@@ -112,27 +138,38 @@
                         </thead>
                         <tbody>
 
-                        @foreach ($document as $company)
+                        @foreach ($AuditLog as $company)
 
                             <tr>
-
 
                                 <td>
                                     <div class="userDatatable-content">
                                         {{ $company->id }}
                                     </div>
-                                </td>
-                                <td>
+                                </td> <td>
                                     <div class="userDatatable-content">
                                         {{ $company->user->name }}
                                     </div>
                                 </td>
                                 <td>
                                     <div class="userDatatable-content">
-                                        {{ $company->FileURL }}
+                                        {{ $company->ActionType }}
                                     </div>
                                 </td>
-
+                                <td>
+                                    <div class="userDatatable-content">
+                                        {{ $company->EntityAffected }}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="userDatatable-content">
+                                        {{ $company->ActionDescription }}
+                                    </div>
+                                </td><td>
+                                    <div class="userDatatable-content">
+                                        {{ $company->Date }}
+                                    </div>
+                                </td>
 
 
 
@@ -140,13 +177,14 @@
                                 <td>
                                     <div class="userDatatable-content">
                                         <ul class="orderDatatable_actions mb-0 d-flex flex-wrap">
-                                            <form action="{{ route('document.destroy',$company->id) }}" method="Post" style="display: inline-flex;">
+                                            <form action=""
+                                                  method="Post" style="display: inline-flex;">
                                                 <li>
                                                     <a href="#" class="view">
                                                         <span data-feather="eye"></span></a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{ route('document.edit',$company->id) }}" class="edit">
+                                                    <a href="" class="edit">
                                                         <span data-feather="edit"></span></a>
                                                 </li>
                                                 <li>
@@ -165,7 +203,7 @@
 
                         </tbody>
                     </table>
-                    {!! $document->links() !!}
+
                 </div>
                 <div class="d-flex justify-content-end pt-30">
 

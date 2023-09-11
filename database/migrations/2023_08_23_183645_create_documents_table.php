@@ -13,8 +13,6 @@ return new class extends Migration
     {
         Schema::create('document', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('absence_id');
-            $table->foreign('absence_id')->references('id')->on('absences');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('FileURL');

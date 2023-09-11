@@ -14,6 +14,7 @@ class Document extends Model
     use HasFactory;
     protected $fillable = [
         'FileURL',
+        'user_id'
     ];
 
     public function user()

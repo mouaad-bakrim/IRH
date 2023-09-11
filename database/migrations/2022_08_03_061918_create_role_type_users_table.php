@@ -17,6 +17,7 @@ class CreateRoleTypeUsersTable extends Migration
         Schema::create('role_type_users', function (Blueprint $table) {
             $table->id();
             $table->string('role_type')->nullable();
+            $table->integer('RoleHierarchy')->default(0);
             $table->timestamps();
         });
 

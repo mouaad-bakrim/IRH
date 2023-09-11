@@ -4,8 +4,8 @@
     <div class="breadcrumb-main user-member justify-content-sm-between ">
         <div class=" d-flex flex-wrap justify-content-center breadcrumb-main__wrapper">
             <div class="d-flex align-items-center user-member__title justify-content-center mr-sm-25">
-                <h4 class="text-capitalize fw-500 breadcrumb-title">list document</h4>
-                <span class="sub-title ml-sm-25 pl-sm-25">274 document</span>
+                <h4 class="text-capitalize fw-500 breadcrumb-title">list SalaryAdvan</h4>
+                <span class="sub-title ml-sm-25 pl-sm-25">274SalaryAdvance</span>
             </div>
 
             <form action="/" class="d-flex align-items-center user-member__form my-sm-0 my-2">
@@ -15,11 +15,11 @@
             </form>
 
         </div>
-        <!------------------ajoute document --------------->
+        <!------------------ajoute EmployeeCertification --------------->
 
         <div class="action-btn">
             <a href="#" class="btn px-15 btn-primary" data-toggle="modal" data-target="#new-member">
-                <i class="las la-plus fs-16"></i>Add New document</a>
+                <i class="las la-plus fs-16"></i>Add New SalaryAdvance</a>
 
             <!-- Modal -->
             <div class="modal fade new-member" id="new-member" role="dialog" tabindex="-1"
@@ -39,8 +39,10 @@
                                         {{ session('status') }}
                                     </div>
                                 @endif
-                                <form action="{{ route('document.store') }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('SalaryAdvanceRequests.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
+
+
                                     <div class="form-group mb-20">
                                         <select class="form-control select " name="user_id">
                                             <option selected disabled>Select Employer:</option>
@@ -49,21 +51,36 @@
                                             @endforeach
                                         </select>
                                     </div>
-
                                     <div class="form-group mb-20">
-                                        <input type="text" name="FileURL" class="form-control" placeholder="FileURL">
-                                        @error('FileURL')
+                                        <input type="text" name="ActionDate" class="form-control" placeholder="ActionDate">
+                                        @error('ActionDate')
                                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                                         @enderror
                                     </div>
-
+                                    <div class="form-group mb-20">
+                                        <input type="text" name="RequestDate" class="form-control" placeholder="RequestDate">
+                                        @error('RequestDate')
+                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                        @enderror
+                                    </div> <div class="form-group mb-20">
+                                        <input type="text" name="RequestAmount" class="form-control" placeholder="RequestAmount">
+                                        @error('RequestAmount')
+                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group mb-20">
+                                        <input type="text" name="Status" class="form-control" placeholder="Status">
+                                        @error('Status')
+                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                        @enderror
+                                    </div>
 
 
                                     <div class="button-group d-flex pt-25">
 
 
                                         <button type="submit" class="btn btn-primary btn-default btn-squared text-capitalize">add new
-                                            document
+                                            SalaryAdvanceRequests
                                         </button>
 
 
@@ -87,7 +104,7 @@
 
 
     </div>
-    <!-------------------        Liste document         -------->
+    <!-------------------        Liste EmployeeCertification         -------->
     <div class="row">
         <div class="col-lg-12">
             <div class="userDatatable global-shadow border p-30 bg-white radius-xl w-100 mb-30">
@@ -99,11 +116,21 @@
                             <th>
                                 <span class="userDatatable-title">ID</span>
                             </th>
+
                             <th>
-                                <span class="userDatatable-title">employer</span>
+                                <span class="userDatatable-title">emloyer</span>
                             </th>
                             <th>
-                                <span class="userDatatable-title">FileURL</span>
+                                <span class="userDatatable-title">RequestAmount</span>
+                            </th>
+                           <th>
+                                <span class="userDatatable-title">RequestDate</span>
+                            </th>
+                            <th>
+                                <span class="userDatatable-title">ActionDate</span>
+                            </th>
+                            <th>
+                                <span class="userDatatable-title">Status</span>
                             </th>
                             <th>
                                 <span class="userDatatable-title ">action</span>
@@ -112,27 +139,38 @@
                         </thead>
                         <tbody>
 
-                        @foreach ($document as $company)
+                        @foreach ($SalaryAdvanceRequests as $company)
 
                             <tr>
-
 
                                 <td>
                                     <div class="userDatatable-content">
                                         {{ $company->id }}
                                     </div>
-                                </td>
-                                <td>
+                                </td> <td>
                                     <div class="userDatatable-content">
                                         {{ $company->user->name }}
                                     </div>
                                 </td>
                                 <td>
                                     <div class="userDatatable-content">
-                                        {{ $company->FileURL }}
+                                        {{ $company->RequestAmount }}
                                     </div>
                                 </td>
-
+                                <td>
+                                    <div class="userDatatable-content">
+                                        {{ $company->RequestDate }}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="userDatatable-content">
+                                        {{ $company->ActionDate }}
+                                    </div>
+                                </td> <td>
+                                    <div class="userDatatable-content">
+                                        {{ $company->Status }}
+                                    </div>
+                                </td>
 
 
 
@@ -140,13 +178,14 @@
                                 <td>
                                     <div class="userDatatable-content">
                                         <ul class="orderDatatable_actions mb-0 d-flex flex-wrap">
-                                            <form action="{{ route('document.destroy',$company->id) }}" method="Post" style="display: inline-flex;">
+                                            <form action=""
+                                                  method="Post" style="display: inline-flex;">
                                                 <li>
                                                     <a href="#" class="view">
                                                         <span data-feather="eye"></span></a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{ route('document.edit',$company->id) }}" class="edit">
+                                                    <a href="" class="edit">
                                                         <span data-feather="edit"></span></a>
                                                 </li>
                                                 <li>
@@ -165,36 +204,7 @@
 
                         </tbody>
                     </table>
-                    {!! $document->links() !!}
-                </div>
-                <div class="d-flex justify-content-end pt-30">
 
-                    <nav class="atbd-page ">
-                        <ul class="atbd-pagination d-flex">
-                            <li class="atbd-pagination__item">
-                                <a href="#" class="atbd-pagination__link pagination-control"><span
-                                        class="la la-angle-left"></span></a>
-                                <a href="#" class="atbd-pagination__link"><span class="page-number">1</span></a>
-                                <a href="#" class="atbd-pagination__link active"><span class="page-number">2</span></a>
-                                <a href="#" class="atbd-pagination__link"><span class="page-number">3</span></a>
-                                <a href="#" class="atbd-pagination__link pagination-control"><span class="page-number">...</span></a>
-                                <a href="#" class="atbd-pagination__link"><span class="page-number">12</span></a>
-                                <a href="#" class="atbd-pagination__link pagination-control"><span
-                                        class="la la-angle-right"></span></a>
-                                <a href="#" class="atbd-pagination__option">
-                                </a>
-                            </li>
-                            <li class="atbd-pagination__item">
-                                <div class="paging-option">
-                                    <select name="page-number" class="page-selection">
-                                        <option value="20">20/page</option>
-                                        <option value="40">40/page</option>
-                                        <option value="60">60/page</option>
-                                    </select>
-                                </div>
-                            </li>
-                        </ul>
-                    </nav>
                 </div>
             </div>
         </div>
